@@ -1,3 +1,4 @@
 # picker
 
-A description of this project.
+A simple app to pick something out of a list of things
+TODO: Complete README

@@ -3,8 +3,11 @@ using Adw 1;
 
 template $PickerWindow : Adw.ApplicationWindow {
   default-width: 600;
-  default-height: 300;
-  content: 
+  default-height: 750;
+  title: "Picker";
+  styles ["devel"] // TODO: Remove devel style at release
+
+  content:
   Adw.ToolbarView {
     [top]
     Adw.HeaderBar header_bar {
@@ -16,19 +19,39 @@ template $PickerWindow : Adw.ApplicationWindow {
         menu-model: primary_menu;
       }
     }
-    content: 
-    Label label {
-      label: "Hello, World!";
+    content: Adw.StatusPage {
+      title: "Picker";
+      description: "A simple app to pick something out of a list of things";
+      icon-name: "io.github.mezoahmedii.Picker-symbolic";
 
-      styles [
-        "title-1",
-      ]
-    }
+      Adw.Clamp {
+        maximum-size: 400;
+        tightening-threshold: 300;
 
-    ;
-  }
+        Box {
+          orientation: vertical;
 
-  ;
+          Adw.PreferencesGroup elementsList {}
+
+          Box {
+          halign: center;
+
+            Button {
+              action-name: "win.chooseElement";
+
+              Adw.ButtonContent {
+                label: "Choose";
+                icon-name: "choose-symbolic";
+                halign: center;
+              }
+
+              styles ["pill", "suggested-action"]
+            }
+          }
+        }
+      }
+    };
+  };
 }
 
 menu primary_menu {
