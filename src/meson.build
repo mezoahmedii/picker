@@ -2,11 +2,21 @@ pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 moduledir = pkgdatadir / 'picker'
 gnome = import('gnome')
 
+blueprints = custom_target('blueprints',
+  input: files(
+    'window.blp',
+    'gtk/help-overlay.blp',
+  ),
+  output: '.',
+  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+)
+
 gnome.compile_resources('picker',
   'picker.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
+  dependencies: blueprints,
 )
 
 python = import('python')
