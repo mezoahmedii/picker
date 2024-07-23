@@ -19,7 +19,7 @@ class PickerApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.set_accels_for_action('win.chooseElement', ['<primary>d'])
+        self.set_accels_for_action('win.chooseElement', ['<primary>Return'])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -38,7 +38,7 @@ class PickerApplication(Adw.Application):
                                 application_name='Picker',
                                 application_icon='io.github.mezoahmedii.Picker',
                                 developer_name='MezoAhmedII',
-                                version='0.1.0',
+                                version='1.0.0',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII')
         about.present(parent=self.props.active_window)
