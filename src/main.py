@@ -63,3 +63,4 @@ def main(version):
     """The application's entry point."""
     app = PickerApplication()
     return app.run(sys.argv)
+
