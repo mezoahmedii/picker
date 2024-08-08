@@ -29,8 +29,9 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "dir",
-                    "path" : "."
+                    "type" : "git",
+                    "path" : "https://github.com/mezoahmedii/picker.git",
+                    "branch" : "main"
                 }
             ]
         }
