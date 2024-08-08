@@ -1,7 +1,7 @@
 {
     "id" : "io.github.mezoahmedii.Picker",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "46",
     "sdk" : "org.gnome.Sdk",
     "command" : "picker",
     "finish-args" : [

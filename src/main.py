@@ -38,7 +38,7 @@ class PickerApplication(Adw.Application):
                                 application_name='Picker',
                                 application_icon='io.github.mezoahmedii.Picker',
                                 developer_name='MezoAhmedII',
-                                version='1.0.0',
+                                version='1.0.1',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII')
         about.present(parent=self.props.active_window)
