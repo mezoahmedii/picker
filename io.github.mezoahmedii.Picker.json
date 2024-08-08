@@ -25,15 +25,26 @@
     "modules" : [
         {
             "name" : "Picker",
-            "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
                 {
                     "type" : "git",
-                    "path" : "https://github.com/mezoahmedii/picker.git",
+                    "url" : "https://github.com/mezoahmedii/picker.git",
                     "branch" : "main"
                 }
             ]
-        }
+        },
+        {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "cleanup": ["*"],
+            "sources": [
+    		{
+      		    "type": "git",
+      		    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.12.0"
+    		}
+	    ]
+	}
     ]
 }
