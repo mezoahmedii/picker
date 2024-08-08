@@ -29,8 +29,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///mnt/Linux Data/Code/GTK Projects"
+                    "type" : "dir",
+                    "path" : "."
                 }
             ]
         }
