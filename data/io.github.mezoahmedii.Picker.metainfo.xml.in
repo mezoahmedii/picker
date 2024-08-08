@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<id>io.github.mezoahmedii.Picker.desktop</id>
+  <launchable type="desktop-id">io.github.mezoahmedii.Picker.desktop</launchable>
+  <name>Picker</name>
+  <summary>A simple app to pick something out of a list of things</summary>
+  <developer id="io.github.mezoahmedii">
+    <name>MezoAhmedII</name>
+  </developer>
+  <url type="homepage">https://github.com/mezoahmedii/picker</url>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <content_rating type="oars-1.1" />
 	<description>
-	  <p>No description</p>
+	  <p>Picker is an that can choose something out of a list of things randomly. It can be useful if you have a list of things you want to do but don't know which one to start with, for example.</p>
 	</description>
+  <releases>
+  <release version="1.0.1" date="2024-01-18">
+    <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.1</url>
+    <description>
+        <ul>
+          <li>Minor bugfix in the symbolic icon</li>
+        </ul>
+    </description>
+  </release>
+  <release version="1.0.0" date="2023-08-07">
+    <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.0</url>
+    <description>
+      <p>The first version of the app.</p>
+    </description>
+  </release>
+</releases>
 </component>
