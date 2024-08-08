@@ -29,7 +29,8 @@
     <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.1</url>
     <description>
         <ul>
-          <li>Minor bugfix in the symbolic icon</li>
+          <li>Fixed a small bug in the symbolic icon</li>
+          <li>Changed some stuff in the build process</li>
         </ul>
     </description>
   </release>
