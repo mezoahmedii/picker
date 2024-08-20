@@ -3,7 +3,7 @@
 	<id>io.github.mezoahmedii.Picker</id>
   <launchable type="desktop-id">io.github.mezoahmedii.Picker.desktop</launchable>
   <name>Picker</name>
-  <summary>A simple app to pick something out of a list of things</summary>
+  <summary>Randomly pick somthing to do</summary>
   <developer id="io.github.mezoahmedii">
     <name>MezoAhmedII</name>
   </developer>
@@ -14,6 +14,10 @@
 	<description>
 	  <p>Picker is an that can choose something out of a list of things randomly. It can be useful if you have a list of things you want to do but don't know which one to start with, for example.</p>
 	</description>
+  <branding>
+    <color type="primary" scheme_preference="light">#86dba2</color>
+    <color type="primary" scheme_preference="dark">#3b5e46</color>
+  </branding>
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/mezoahmedii/picker/blob/v1.0.1/screenshots/x86_64/adding.png?raw=true</image>
