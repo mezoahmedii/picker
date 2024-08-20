@@ -21,7 +21,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onEnterElement(self, widget, _):
         if bool(self.entryRow.get_text().strip()):
-            actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip())
+            actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
             removeButton = Gtk.Button(icon_name="remove-symbolic",
                                       valign="center")
             removeButton.get_style_context().add_class("destructive-action")
@@ -43,22 +43,23 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog = Adw.AlertDialog()
 
+        dialog.add_response("dismiss", "Okay")
+        dialog.set_default_response("dismiss")
+
         if elements == []:
             dialog.set_heading("Nothing to choose from")
             dialog.set_body("Please enter some things to be chosen from.")
         else:
             chosenElement = choice(elements)
-            dialog.set_heading(chosenElement.get_title())
+            dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body("has been chosen!")
-            dialog.add_response("remove", "Remove it")
-            dialog.set_response_appearance("remove",
-                                           Adw.ResponseAppearance.DESTRUCTIVE)
             dialog.add_response("copy", "Copy it")
             dialog.set_response_appearance("copy",
                                            Adw.ResponseAppearance.SUGGESTED)
+            dialog.add_response("remove", "Remove it")
+            dialog.set_response_appearance("remove",
+                                           Adw.ResponseAppearance.DESTRUCTIVE)
 
-        dialog.add_response("dismiss", "Okay")
-        dialog.set_default_response("dismiss")
         dialog.choose(self, None, self.onDialogResponse, chosenElement)
 
     def removeElement(self, widget, element):
