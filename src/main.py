@@ -4,7 +4,6 @@
 import sys
 
 from gi.repository import Gtk, Gio, Adw
-from gettext import gettext as __
 from .window import PickerWindow
 
 class PickerApplication(Adw.Application):
@@ -34,7 +33,7 @@ class PickerApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-                                application_name=__('Picker'),
+                                application_name=_('Picker'),
                                 application_icon='io.github.mezoahmedii.Picker',
                                 developer_name='MezoAhmedII',
                                 website="https://github.com/mezoahmedii/picker",
