@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Picker
+Comment=Randomly pick something to do
 Exec=picker
 Icon=io.github.mezoahmedii.Picker
 Terminal=false
