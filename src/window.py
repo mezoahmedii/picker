@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice
+from gettext import gettext as __
 from gi.repository import Gtk, Gio, Adw, Gdk
 
 @Gtk.Template(resource_path='/io/github/mezoahmedii/Picker/window.ui')
@@ -9,17 +10,28 @@ class PickerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickerWindow'
 
     elementsList = Gtk.Template.Child()
-    entryRow = Adw.EntryRow(title="Add something...", show_apply_button=True)
+    entryRow = Adw.EntryRow(title=__("Add something..."), show_apply_button=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.settings = Gio.Settings(schema_id="io.github.mezoahmedii.Picker")
+
+        self.settings.bind("width", self, "default-width",
+                           Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("height", self, "default-height",
+                           Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("is-maximized", self, "maximized",
+                           Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("is-fullscreen", self, "fullscreened",
+                           Gio.SettingsBindFlags.DEFAULT)
 
         self.createAction("chooseElement", self.onChooseElement)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
 
-    def onEnterElement(self, widget, _):
+    def onEnterElement(self, widget, __):
         if bool(self.entryRow.get_text().strip()):
             actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
             removeButton = Gtk.Button(icon_name="remove-symbolic",
@@ -43,20 +55,20 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog = Adw.AlertDialog()
 
-        dialog.add_response("dismiss", "Okay")
+        dialog.add_response("dismiss", __("Okay"))
         dialog.set_default_response("dismiss")
 
         if elements == []:
-            dialog.set_heading("Nothing to choose from")
-            dialog.set_body("Please enter some things to be chosen from.")
+            dialog.set_heading(__("Nothing to choose from"))
+            dialog.set_body(__("Please enter some things to be chosen from."))
         else:
             chosenElement = choice(elements)
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
-            dialog.set_body("has been chosen!")
-            dialog.add_response("copy", "Copy it")
+            dialog.set_body(__("has been chosen!"))
+            dialog.add_response("copy", __("Copy it"))
             dialog.set_response_appearance("copy",
                                            Adw.ResponseAppearance.SUGGESTED)
-            dialog.add_response("remove", "Remove it")
+            dialog.add_response("remove", __("Remove it"))
             dialog.set_response_appearance("remove",
                                            Adw.ResponseAppearance.DESTRUCTIVE)
 
@@ -76,4 +88,5 @@ class PickerWindow(Adw.ApplicationWindow):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
+
 

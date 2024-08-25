@@ -8,8 +8,8 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
+from gettext import gettext as __
 from .window import PickerWindow
-
 
 class PickerApplication(Adw.Application):
     """The main application singleton class."""
@@ -35,9 +35,11 @@ class PickerApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-                                application_name='Picker',
+                                application_name=__('Picker'),
                                 application_icon='io.github.mezoahmedii.Picker',
                                 developer_name='MezoAhmedII',
+                                website="https://github.com/mezoahmedii/picker",
+                                issue_url="https://github.com/mezoahmedii/picker/issues",
                                 version='1.0.1',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII')
@@ -63,4 +65,5 @@ def main(version):
     """The application's entry point."""
     app = PickerApplication()
     return app.run(sys.argv)
+
 

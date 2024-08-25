@@ -1,6 +1,8 @@
-data/io.github.mezoahmedii.Picker.desktop.in
-data/io.github.mezoahmedii.Picker.metainfo.xml.in
-data/io.github.mezoahmedii.Picker.gschema.xml
 src/main.py
 src/window.py
-src/window.ui
+
+src/window.blp
+src/gtk/help-overlay.blp
+
+data/io.github.mezoahmedii.Picker.desktop.in
+data/io.github.mezoahmedii.Picker.metainfo.xml.in

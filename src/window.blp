@@ -2,9 +2,9 @@ using Gtk 4.0;
 using Adw 1;
 
 template $PickerWindow : Adw.ApplicationWindow {
-  default-width: 600;
-  default-height: 750;
-  title: "Picker";
+  title: _("Picker");
+
+  //styles ["devel"] // Update version and remove this before release!!
 
   content:
   Adw.ToolbarView {
@@ -19,8 +19,8 @@ template $PickerWindow : Adw.ApplicationWindow {
       }
     }
     content: Adw.StatusPage {
-      title: "Picker";
-      description: "Randomly pick something to do";
+      title: _("Picker");
+      description: _("Randomly pick something to do");
       icon-name: "io.github.mezoahmedii.Picker-symbolic";
 
       Adw.Clamp {
@@ -39,7 +39,7 @@ template $PickerWindow : Adw.ApplicationWindow {
               action-name: "win.chooseElement";
 
               Adw.ButtonContent {
-                label: "Choose";
+                label: _("Choose Something");
                 icon-name: "choose-symbolic";
                 halign: center;
               }
