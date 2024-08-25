@@ -20,29 +20,39 @@
   </branding>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/mezoahmedii/picker/blob/v1.0.1/screenshots/x86_64/adding.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.0.2/screenshots/x86_64/adding.png?raw=true</image>
       <caption>Adding things to the list of things to be chosen</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/mezoahmedii/picker/blob/v1.0.1/screenshots/x86_64/choosing.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.0.2/screenshots/x86_64/choosing.png?raw=true</image>
       <caption>Choosing something</caption>
     </screenshot>
   </screenshots>
   <releases>
-  <release version="1.0.1" date="2024-08-08">
-    <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.1</url>
-    <description>
-        <ul>
-          <li>Fixed a small bug in the symbolic icon</li>
-          <li>Changed some stuff in the build process</li>
-        </ul>
-    </description>
-  </release>
-  <release version="1.0.0" date="2024-07-24">
-    <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.0</url>
-    <description>
-      <p>The first version of the app.</p>
-    </description>
-  </release>
-</releases>
+    <release version="1.0.2" date="2024-08-08">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.2</url>
+      <description>
+          <ul>
+            <li>Fixed a bug where something containing "&amp;" would not show up</li>
+            <li>Updated app info and screenshots to fit guidelines</li>
+            <li>Added translation files</li>
+          </ul>
+      </description>
+    </release>
+    <release version="1.0.1" date="2024-08-08">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.1</url>
+      <description>
+          <ul>
+            <li>Fixed a small bug in the symbolic icon</li>
+            <li>Changed some stuff in the build process</li>
+          </ul>
+      </description>
+    </release>
+    <release version="1.0.0" date="2024-07-24">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.0</url>
+      <description>
+        <p>The first version of the app.</p>
+      </description>
+    </release>
+  </releases>
 </component>

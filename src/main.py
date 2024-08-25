@@ -40,7 +40,7 @@ class PickerApplication(Adw.Application):
                                 developer_name='MezoAhmedII',
                                 website="https://github.com/mezoahmedii/picker",
                                 issue_url="https://github.com/mezoahmedii/picker/issues",
-                                version='1.0.1',
+                                version='1.0.2',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII')
         about.present(parent=self.props.active_window)
