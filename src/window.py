@@ -59,7 +59,7 @@ class PickerWindow(Adw.ApplicationWindow):
         dialog.set_default_response("dismiss")
 
         if elements == []:
-            dialog.set_heading(__("Nothing to choose from"))
+            dialog.set_heading(__("Nothing to Choose"))
             dialog.set_body(__("Please enter some things to be chosen from."))
         else:
             chosenElement = choice(elements)
