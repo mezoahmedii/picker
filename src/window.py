@@ -14,6 +14,8 @@ class PickerWindow(Adw.ApplicationWindow):
     elementsList = Gtk.Template.Child()
     entryRow = Adw.EntryRow(title=__("Add something…"), show_apply_button=True)
 
+    latest_removed_item = None
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -29,19 +31,23 @@ class PickerWindow(Adw.ApplicationWindow):
                            Gio.SettingsBindFlags.DEFAULT)
 
         self.createAction("choose-element", self.onChooseElement)
+        self.createAction("restore-element", self.onRestoreElement)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
 
-    def onEnterElement(self, widget, __):
+    def onEnterElement(self, widget, _):
         if bool(self.entryRow.get_text().strip()):
             actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
-            removeButton = Gtk.Button(icon_name="remove-symbolic",
-                                      valign="center")
+
+            removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
             removeButton.get_style_context().add_class("destructive-action")
             removeButton.connect("clicked", self.removeElement, actionRow)
+
             actionRow.add_suffix(removeButton)
-            self.elementsList.add(actionRow)
+
+            self.addElement(actionRow)
+
             self.entryRow.set_text("")
             self.entryRow.set_show_apply_button(False)
             self.entryRow.set_show_apply_button(True)
@@ -76,9 +82,21 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog.choose(self, None, self.onDialogResponse, chosenElement)
 
+    def onRestoreElement(self, widget, _):
+        self.addElement(self.latest_removed_item)
+
+    def addElement(self, element):
+        self.elementsList.add(element)
+
     def removeElement(self, widget, element):
+        self.latest_removed_item = element
         self.elementsList.remove(element)
-        self.toast_overlay.add_toast(Adw.Toast(title=__("Item removed from the list")))
+
+        self.toast_overlay.add_toast(
+            Adw.Toast(title=__("Removed item from the list"),
+                button_label=__("Undo"),
+                action_name="win.restore-element")
+        )
 
     def onDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
