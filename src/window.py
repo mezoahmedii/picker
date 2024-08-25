@@ -78,11 +78,13 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def removeElement(self, widget, element):
         self.elementsList.remove(element)
+        self.toast_overlay.add_toast(Adw.Toast(title=__("Item removed from the list")))
 
     def onDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
         if response == "copy":
             Gdk.Display.get_default().get_clipboard().set(element.get_title())
+            self.toast_overlay.add_toast(Adw.Toast(title=__("Copied item to clipboard")))
         if response == "remove":
             self.removeElement(None, element)
 
