@@ -17,7 +17,7 @@ class PickerApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
 
-        self.set_accels_for_action('win.chooseElement', ['<primary>Return'])
+        self.set_accels_for_action('win.choose-element', ['<primary>Return'])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -65,5 +65,3 @@ def main(version):
     """The application's entry point."""
     app = PickerApplication()
     return app.run(sys.argv)
-
-

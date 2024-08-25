@@ -26,7 +26,7 @@ class PickerWindow(Adw.ApplicationWindow):
         self.settings.bind("is-fullscreen", self, "fullscreened",
                            Gio.SettingsBindFlags.DEFAULT)
 
-        self.createAction("chooseElement", self.onChooseElement)
+        self.createAction("choose-element", self.onChooseElement)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
@@ -88,5 +88,3 @@ class PickerWindow(Adw.ApplicationWindow):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
-
-
