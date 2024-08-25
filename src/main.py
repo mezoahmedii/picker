@@ -13,8 +13,10 @@ class PickerApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.github.mezoahmedii.Picker',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
+
         self.set_accels_for_action('win.chooseElement', ['<primary>Return'])
 
     def do_activate(self):
@@ -38,7 +40,8 @@ class PickerApplication(Adw.Application):
                                 issue_url="https://github.com/mezoahmedii/picker/issues",
                                 version='1.0.2',
                                 developers=['MezoAhmedII'],
-                                copyright='© 2024 MezoAhmedII')
+                                copyright='© 2024 MezoAhmedII',
+                                license_type=Gtk.License.GPL_3_0)
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -53,6 +56,7 @@ class PickerApplication(Adw.Application):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
+
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
