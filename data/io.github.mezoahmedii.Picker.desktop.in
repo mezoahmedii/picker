@@ -1,9 +1,13 @@
 [Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=picker
 Name=Picker
 Comment=Randomly pick something to do
-Exec=picker
 Icon=io.github.mezoahmedii.Picker
-Terminal=false
-Type=Application
-Categories=Utility
-StartupNotify=true
+Categories=GNOME;GTK;Utility;Amusement;
+# Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+Keywords=picker;spin;choose;random;
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;
