@@ -42,12 +42,16 @@ template $PickerWindow : Adw.ApplicationWindow {
               action-name: "win.chooseElement";
 
               Adw.ButtonContent {
-                label: _("Choose Something");
+                label: _("_Choose");
+                use-underline: true;
                 icon-name: "choose-symbolic";
                 halign: center;
               }
 
-              styles ["pill", "suggested-action"]
+              styles [
+                "pill",
+                "suggested-action"
+              ]
             }
           }
         }

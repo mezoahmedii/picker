@@ -10,7 +10,7 @@ class PickerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickerWindow'
 
     elementsList = Gtk.Template.Child()
-    entryRow = Adw.EntryRow(title=__("Add something..."), show_apply_button=True)
+    entryRow = Adw.EntryRow(title=__("Add something…"), show_apply_button=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -65,10 +65,10 @@ class PickerWindow(Adw.ApplicationWindow):
             chosenElement = choice(elements)
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body(__("has been chosen!"))
-            dialog.add_response("copy", __("Copy it"))
+            dialog.add_response("copy", __("Copy"))
             dialog.set_response_appearance("copy",
                                            Adw.ResponseAppearance.SUGGESTED)
-            dialog.add_response("remove", __("Remove it"))
+            dialog.add_response("remove", __("Remove"))
             dialog.set_response_appearance("remove",
                                            Adw.ResponseAppearance.DESTRUCTIVE)
 
