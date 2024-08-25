@@ -15,12 +15,16 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+gettext.install('picker', localedir)
+
 locale.bindtextdomain('picker', localedir)
 locale.textdomain('picker')
-gettext.install('picker', localedir)
 
 if __name__ == '__main__':
     import gi
+
+    gi.require_version('Gtk', '4.0')
+    gi.require_version('Adw', '1')
 
     from gi.repository import Gio
     resource = Gio.Resource.load(os.path.join(pkgdatadir, 'picker.gresource'))
