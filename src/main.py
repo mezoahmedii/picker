@@ -9,6 +9,7 @@ from .window import PickerWindow
 
 class PickerApplication(Adw.Application):
     """The main application singleton class."""
+    __gtype_name__ = "PickerApplication"
 
     def __init__(self):
         super().__init__(application_id='io.github.mezoahmedii.Picker',
