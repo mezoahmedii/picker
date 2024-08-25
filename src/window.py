@@ -9,6 +9,8 @@ from gi.repository import Gtk, Gio, Adw, Gdk
 class PickerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickerWindow'
 
+    toast_overlay = Gtk.Template.Child()
+
     elementsList = Gtk.Template.Child()
     entryRow = Adw.EntryRow(title=__("Add something…"), show_apply_button=True)
 

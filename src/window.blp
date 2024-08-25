@@ -8,54 +8,55 @@ template $PickerWindow : Adw.ApplicationWindow {
   width-request: 360;
   height-request: 294;
 
-  content:
-  Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar header_bar {
-      [end]
-      MenuButton {
-        primary: true;
-        icon-name: "open-menu-symbolic";
-        tooltip-text: _("Menu");
-        menu-model: primary_menu;
+  content: Adw.ToastOverlay toast_overlay {
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar header_bar {
+        [end]
+        MenuButton {
+          primary: true;
+          icon-name: "open-menu-symbolic";
+          tooltip-text: _("Menu");
+          menu-model: primary_menu;
+        }
       }
-    }
 
-    content: Adw.StatusPage {
-      title: _("Picker");
-      description: _("Randomly pick something to do");
-      icon-name: "io.github.mezoahmedii.Picker-symbolic";
+      content: Adw.StatusPage {
+        title: _("Picker");
+        description: _("Randomly pick something to do");
+        icon-name: "io.github.mezoahmedii.Picker-symbolic";
 
-      Adw.Clamp {
-        maximum-size: 400;
-        tightening-threshold: 300;
-
-        Box {
-          orientation: vertical;
-
-          Adw.PreferencesGroup elementsList {}
+        Adw.Clamp {
+          maximum-size: 400;
+          tightening-threshold: 300;
 
           Box {
-          halign: center;
+            orientation: vertical;
 
-            Button {
-              action-name: "win.choose-element";
+            Adw.PreferencesGroup elementsList {}
 
-              Adw.ButtonContent {
-                label: _("_Choose");
-                use-underline: true;
-                icon-name: "choose-symbolic";
-                halign: center;
+            Box {
+            halign: center;
+
+              Button {
+                action-name: "win.choose-element";
+
+                Adw.ButtonContent {
+                  label: _("_Choose");
+                  use-underline: true;
+                  icon-name: "choose-symbolic";
+                  halign: center;
+                }
+
+                styles [
+                  "pill",
+                  "suggested-action"
+                ]
               }
-
-              styles [
-                "pill",
-                "suggested-action"
-              ]
             }
           }
         }
-      }
+      };
     };
   };
 }
