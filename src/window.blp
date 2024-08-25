@@ -42,6 +42,7 @@ template $PickerWindow : Adw.ApplicationWindow {
                 action-name: "win.choose-element";
 
                 Adw.ButtonContent {
+                  // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
                   label: _("_Choose");
                   use-underline: true;
                   icon-name: "choose-symbolic";
@@ -64,11 +65,13 @@ template $PickerWindow : Adw.ApplicationWindow {
 menu primary_menu {
   section {
     item {
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
       label: _("_Keyboard Shortcuts");
       action: "win.show-help-overlay";
     }
 
     item {
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
       label: _("_About Picker");
       action: "app.about";
     }
