@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name>Picker</name>
+  <shortdesc xml:lang="en">Randomly pick somthing to do</shortdesc>
+  <description xml:lang="en">
+    Picker is a simple app that can pick something for you from a list of things.
+
+    For example, if you can't decide what to have for dinner, put your favorite meals in and let the Picker choose one for you.
+  </description>
+
+  <homepage rdf:resource="https://github.com/mezoahmedii/picker" />
+  <download-page rdf:resource="https://github.com/mezoahmedii/picker/releases" />
+  <bug-database rdf:resource="https://github.com/mezoahmedii/picker/issues" />
+
+  <programming-language>Python</programming-language>
+
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>MezoAhmedII</foaf:name>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://github.com" />
+          <foaf:accountName>mezoahmedii</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+    </foaf:Person>
+  </maintainer>
+</Project>

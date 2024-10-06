@@ -7,9 +7,9 @@
 
 <details>
   <summary><h3>Images</h3></summary>
-  
+
   <img src="https://github.com/mezoahmedii/picker/blob/main/screenshots/x86_64/adding.png?raw=true" />
   <img src="https://github.com/mezoahmedii/picker/blob/main/screenshots/x86_64/choosing.png?raw=true" />
 </details>
 
-Picker is an that can randomly choose something out of a list of things randomly. It can be useful if you have a list of things you want to do but don't know which one to start with, for example.
+Picker is a simple app that can pick something for you from a list of things. For example, if you can't decide what to have for dinner, put your favorite meals in and let the Picker choose one for you.

@@ -2,15 +2,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice
-from gettext import gettext as __
 from gi.repository import Gtk, Gio, Adw, Gdk
 
 @Gtk.Template(resource_path='/io/github/mezoahmedii/Picker/window.ui')
 class PickerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickerWindow'
 
+    toast_overlay = Gtk.Template.Child()
+
     elementsList = Gtk.Template.Child()
-    entryRow = Adw.EntryRow(title=__("Add something..."), show_apply_button=True)
+    entryRow = Adw.EntryRow(title=_("Add something…"), show_apply_button=True)
+
+    latest_removed_item = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -26,20 +29,24 @@ class PickerWindow(Adw.ApplicationWindow):
         self.settings.bind("is-fullscreen", self, "fullscreened",
                            Gio.SettingsBindFlags.DEFAULT)
 
-        self.createAction("chooseElement", self.onChooseElement)
+        self.createAction("choose-element", self.onChooseElement)
+        self.createAction("restore-element", self.onRestoreElement)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
 
-    def onEnterElement(self, widget, __):
+    def onEnterElement(self, widget, _):
         if bool(self.entryRow.get_text().strip()):
             actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
-            removeButton = Gtk.Button(icon_name="remove-symbolic",
-                                      valign="center")
+
+            removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
             removeButton.get_style_context().add_class("destructive-action")
             removeButton.connect("clicked", self.removeElement, actionRow)
+
             actionRow.add_suffix(removeButton)
-            self.elementsList.add(actionRow)
+
+            self.addElement(actionRow)
+
             self.entryRow.set_text("")
             self.entryRow.set_show_apply_button(False)
             self.entryRow.set_show_apply_button(True)
@@ -55,32 +62,46 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog = Adw.AlertDialog()
 
-        dialog.add_response("dismiss", __("Okay"))
+        dialog.add_response("dismiss", _("Okay"))
         dialog.set_default_response("dismiss")
 
         if elements == []:
-            dialog.set_heading(__("Nothing to choose from"))
-            dialog.set_body(__("Please enter some things to be chosen from."))
+            dialog.set_heading(_("Nothing to Choose"))
+            dialog.set_body(_("Please enter some things to be chosen from."))
         else:
             chosenElement = choice(elements)
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
-            dialog.set_body(__("has been chosen!"))
-            dialog.add_response("copy", __("Copy it"))
+            dialog.set_body(_("has been chosen!"))
+            dialog.add_response("copy", _("Copy"))
             dialog.set_response_appearance("copy",
                                            Adw.ResponseAppearance.SUGGESTED)
-            dialog.add_response("remove", __("Remove it"))
+            dialog.add_response("remove", _("Remove"))
             dialog.set_response_appearance("remove",
                                            Adw.ResponseAppearance.DESTRUCTIVE)
 
         dialog.choose(self, None, self.onDialogResponse, chosenElement)
 
+    def onRestoreElement(self, widget, _):
+        self.addElement(self.latest_removed_item)
+
+    def addElement(self, element):
+        self.elementsList.add(element)
+
     def removeElement(self, widget, element):
+        self.latest_removed_item = element
         self.elementsList.remove(element)
+
+        self.toast_overlay.add_toast(
+            Adw.Toast(title=_("Removed item from the list"),
+                button_label=_("Undo"),
+                action_name="win.restore-element")
+        )
 
     def onDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
         if response == "copy":
             Gdk.Display.get_default().get_clipboard().set(element.get_title())
+            self.toast_overlay.add_toast(Adw.Toast(title=_("Copied item to clipboard")))
         if response == "remove":
             self.removeElement(None, element)
 
@@ -88,5 +109,3 @@ class PickerWindow(Adw.ApplicationWindow):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
-
-
