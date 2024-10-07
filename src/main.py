@@ -30,7 +30,7 @@ class PickerApplication(Adw.Application):
             win = PickerWindow(application=self)
         win.present()
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, widget, __):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
                                 application_name=_('Picker'),
