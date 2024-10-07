@@ -51,7 +51,7 @@ class PickerWindow(Adw.ApplicationWindow):
             self.entryRow.set_show_apply_button(False)
             self.entryRow.set_show_apply_button(True)
 
-    def onChooseElement(self, widget, _):
+    def onChooseElement(self, widget, __):
         elements = []
         child = self.entryRow.get_parent().get_first_child()
         while child is not None:

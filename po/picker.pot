@@ -68,6 +68,7 @@ msgid "Menu"
 msgstr ""
 
 #: src/window.blp:26 data/io.github.mezoahmedii.Picker.desktop.in:8
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
 msgid "Randomly pick something to do"
 msgstr ""
 
@@ -109,10 +110,6 @@ msgstr ""
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.mezoahmedii.Picker.desktop.in:12
 msgid "picker;spin;choose;random;"
-msgstr ""
-
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
-msgid "Randomly pick somthing to do"
 msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
