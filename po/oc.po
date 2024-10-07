@@ -1,0 +1,104 @@
+# Occitan translation file for Picker.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Quentin PAGÈS, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: picker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-24 20:46+0100\n"
+"PO-Revision-Date: 2024-08-26 17:31+0200\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language-Team: \n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+#: src/main.py:38 src/window.blp:5 src/window.blp:22
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5
+#: data/io.github.mezoahmedii.Picker.desktop.in:2
+msgid "Picker"
+msgstr "Causidor"
+
+#: src/window.blp:23 data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
+#: data/io.github.mezoahmedii.Picker.desktop.in:3
+msgid "Randomly pick something to do"
+msgstr "Amassatz aleatòriament quicòm de far"
+
+#: src/window.py:12
+msgid "Add something..."
+msgstr "Apondre quicòm..."
+
+#: src/window.blp:42 src/help-overlay.blp:24
+msgid "Choose Something"
+msgstr "Causir quicòm"
+
+#: src/window.py:61
+msgid "Nothing to choose from"
+msgstr "Pas res a causir"
+
+#: src/window.py:62
+msgid "Please enter some things to be chosen from."
+msgstr "Mercés de picar causetas per causir"
+
+#: src/window.py:66
+msgid "has been chosen!"
+msgstr "es estat causit !"
+
+#: src/window.py:57
+msgid "Okay"
+msgstr "D'acòrdi"
+
+#: src/window.py:67
+msgid "Copy it"
+msgstr "Lo copiar"
+
+#: src/window.py:70
+msgid "Remove it"
+msgstr "Lo suprimir"
+
+#: src/window.blp:17
+msgid "Menu"
+msgstr "Menú"
+
+#: src/window.blp:59
+msgid "Keyboard Shortcuts"
+msgstr "Acorchis de clavièr"
+
+#: src/window.blp:64
+msgid "About Picker"
+msgstr "A prepaus de Causidor"
+
+#: src/gtk/help-overlay.blp:11
+msgid "General"
+msgstr "General"
+
+#: src/gtk/help-overlay.blp:14
+msgid "Show Shortcuts"
+msgstr "Afichar los acorchis"
+
+#: src/gtk/help-overlay.blp:19
+msgid "Quit"
+msgstr "Sortir"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:15
+msgid ""
+"Picker is an that can choose something out of a list of things randomly. It "
+"can be useful if you have a list of things you want to do but don't know "
+"which one to start with, for example."
+msgstr ""
+"Causidor es un esplech que pòt causir quicòm d'una lista de causas a "
+"l'azard. Pòt èsser util s'avètz una lista de causas que volètz far mas "
+"sabètz pas per quala començar, per exemple."
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:24
+msgid "Adding things to the list of things to be chosen"
+msgstr "Apondon de causas a la lista de causas de causir"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:28
+msgid "Choosing something"
+msgstr "Causida de quicòm"
