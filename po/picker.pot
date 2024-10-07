@@ -112,9 +112,6 @@ msgstr ""
 msgid "picker;spin;choose;random;"
 msgstr ""
 
-msgid "Randomly pick somthing to do"
-msgstr ""
-
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
 msgid "MezoAhmedII"
 msgstr ""
