@@ -31,6 +31,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
         self.createAction("choose-element", self.onChooseElement)
         self.createAction("restore-element", self.onRestoreElement)
+        self.createAction("open-file", self.onOpenFile)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
@@ -53,11 +54,10 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onChooseElement(self, widget, __):
         elements = []
-        child = self.entryRow.get_parent().get_first_child()
+        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
             elements.append(child)
             child = child.get_next_sibling()
-        elements.pop(0)
         chosenElement = ""
 
         dialog = Adw.AlertDialog()
@@ -84,6 +84,10 @@ class PickerWindow(Adw.ApplicationWindow):
     def onRestoreElement(self, widget, _):
         self.addElement(self.latest_removed_item)
 
+    def onOpenFile(self, widget, _):
+        native = Gtk.FileDialog()
+        native.open(self, None, self.onOpenFileResponse)
+
     def addElement(self, element):
         self.elementsList.add(element)
 
@@ -104,6 +108,39 @@ class PickerWindow(Adw.ApplicationWindow):
             self.toast_overlay.add_toast(Adw.Toast(title=_("Copied item to clipboard")))
         if response == "remove":
             self.removeElement(None, element)
+
+    def onOpenFileResponse(self, dialog, result):
+        file = dialog.open_finish(result)
+        if file is not None:
+            file.load_contents_async(None, self.openFileComplete)
+
+    def openFileComplete(self, file, result):
+        contents = file.load_contents_finish(result)
+        if not contents[0]:
+            self.toast_overlay.add_toast(f"Unable to open file: {contents[1]}")
+            return
+
+        try:
+            text = contents[1].decode('utf-8')
+        except UnicodeError as err:
+            self.toast_overlay.add_toast("The file isn't encoded properly")
+            return
+
+        child = self.entryRow.get_parent().get_last_child().get_prev_sibling()
+        while child is not None:
+            self.elementsList.remove(child.get_next_sibling())
+            child = child.get_prev_sibling()
+
+        for element in contents[1].decode("utf-8").splitlines():
+            actionRow = Adw.ActionRow(title=element.replace("&", "&amp;"))
+
+            removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
+            removeButton.get_style_context().add_class("destructive-action")
+            removeButton.connect("clicked", self.removeElement, actionRow)
+
+            actionRow.add_suffix(removeButton)
+
+            self.addElement(actionRow)
 
     def createAction(self, name, callback):
         action = Gio.SimpleAction.new(name, None)

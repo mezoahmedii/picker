@@ -12,6 +12,12 @@ template $PickerWindow : Adw.ApplicationWindow {
     child: Adw.ToolbarView {
       [top]
       Adw.HeaderBar header_bar {
+        [start]
+        Button {
+          action-name: "win.open-file";
+          label: _("Open");
+        }
+
         [end]
         MenuButton {
           primary: true;
