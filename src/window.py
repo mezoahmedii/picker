@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice
-from gi.repository import Gtk, Gio, Adw, Gdk
+from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
 @Gtk.Template(resource_path='/io/github/mezoahmedii/Picker/window.ui')
 class PickerWindow(Adw.ApplicationWindow):
@@ -13,9 +13,10 @@ class PickerWindow(Adw.ApplicationWindow):
     entryRow = Adw.EntryRow(title=_("Add something…"), show_apply_button=True)
 
     latest_removed_item = None
-    currentFile = "~/Documents/Untitled.txt"
-    currentFileTitle = "Untitled File"
+    currentFile = ""
+    currentFileTitle = "New File"
     currentFileContent = ""
+    currentFileIsSaved = True
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -34,9 +35,13 @@ class PickerWindow(Adw.ApplicationWindow):
         self.createAction("choose-element", self.onChooseElement)
         self.createAction("restore-element", self.onRestoreElement)
         self.createAction("open-file", self.onOpenFile)
+        self.createAction("save-file", self.onSaveFile)
+        self.createAction("save-file-as", self.onSaveFileAs)
 
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
+
+        self.checkFileContent()
 
     def onEnterElement(self, widget, _):
         if bool(self.entryRow.get_text().strip()):
@@ -90,6 +95,16 @@ class PickerWindow(Adw.ApplicationWindow):
         native = Gtk.FileDialog()
         native.open(self, None, self.onOpenFileResponse)
 
+    def onSaveFile(self, widget, __):
+        if self.currentFile == "":
+            Gio.ActionMap.lookup_action(self, "save-file-as").activate()
+        else:
+            self.saveFile(Gio.File.new_for_path(self.currentFile))
+
+    def onSaveFileAs(self, widget, __):
+        native = Gtk.FileDialog()
+        native.save(self, None, self.onSaveFileResponse)
+
     def addElement(self, element):
         self.elementsList.add(element)
 
@@ -119,6 +134,45 @@ class PickerWindow(Adw.ApplicationWindow):
         file = dialog.open_finish(result)
         if file is not None:
             file.load_contents_async(None, self.openFileComplete)
+
+    def onSaveFileResponse(self, dialog, result):
+        file = dialog.save_finish(result)
+        if file is not None:
+            self.saveFile(file)
+
+    def saveFile(self, file):
+            elements = []
+            child = self.entryRow.get_parent().get_first_child().get_next_sibling()
+            while child is not None:
+                elements.append(child.get_title().replace("&amp;", "&"))
+                child = child.get_next_sibling()
+
+            bytes = GLib.Bytes.new("\n".join(elements).encode("utf-8"))
+            file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
+
+    def saveFileComplete(self, file, result):
+        res = file.replace_contents_finish(result)
+        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        if info:
+            display_name = info.get_attribute_string("standard::display-name")
+        else:
+            display_name = file.get_basename()
+
+        if not res:
+            self.toast_overlay.add_toast("Unable to save file")
+            return
+
+        elements = []
+        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
+        while child is not None:
+            elements.append(child.get_title().replace("&amp;", "&"))
+            child = child.get_next_sibling()
+
+        self.currentFile = file.peek_path()
+        self.currentFileContent = "\n".join(elements)
+        self.currentFileTitle = display_name
+
+        self.checkFileContent()
 
     def openFileComplete(self, file, result):
         contents = file.load_contents_finish(result)
@@ -166,15 +220,12 @@ class PickerWindow(Adw.ApplicationWindow):
             elements.append(child.get_title().replace("&amp;", "&"))
             child = child.get_next_sibling()
 
-        print("a")
-        print(self.currentFileContent)
-        print("y")
-        print("\n".join(elements))
-
         if "\n".join(elements) == self.currentFileContent:
-            self.set_title(self.currentFileTitle)
+            self.set_title(f"{self.currentFileTitle} - Picker")
+            self.currentFileIsSaved = True
         else:
-            self.set_title(f"• {self.currentFileTitle}")
+            self.set_title(f"• {self.currentFileTitle} - Picker")
+            self.currentFileIsSaved = False
 
     def createAction(self, name, callback):
         action = Gio.SimpleAction.new(name, None)
