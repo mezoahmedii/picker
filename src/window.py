@@ -41,7 +41,7 @@ class PickerWindow(Adw.ApplicationWindow):
         self.entryRow.connect("apply", self.onEnterElement, _)
         self.elementsList.add(self.entryRow)
 
-        self.checkFileContent()
+        self.checkFileSaved()
 
     def onEnterElement(self, widget, _):
         if bool(self.entryRow.get_text().strip()):
@@ -60,6 +60,12 @@ class PickerWindow(Adw.ApplicationWindow):
             self.entryRow.set_show_apply_button(True)
 
     def onChooseElement(self, widget, __):
+        elements = []
+        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
+        while child is not None:
+            elements.append(child)
+            child = child.get_next_sibling()
+
         chosenElement = ""
 
         dialog = Adw.AlertDialog()
@@ -67,12 +73,12 @@ class PickerWindow(Adw.ApplicationWindow):
         dialog.add_response("dismiss", _("Okay"))
         dialog.set_default_response("dismiss")
 
-        if (elements := self.getElements()) == []:
+        if elements == []:
             dialog.set_heading(_("Nothing to Choose"))
             dialog.set_body(_("Please enter some things to be chosen from."))
         else:
-            chosenElement = choice(elements.splitlines())
-            dialog.set_heading(chosenElement.replace("&amp;", "&"))
+            chosenElement = choice(elements)
+            dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body(_("has been chosen!"))
             dialog.add_response("copy", _("Copy"))
             dialog.set_response_appearance("copy",
@@ -103,7 +109,7 @@ class PickerWindow(Adw.ApplicationWindow):
     def addElement(self, element):
         self.elementsList.add(element)
 
-        self.checkFileContent()
+        self.checkFileSaved()
 
     def removeElement(self, widget, element):
         self.latest_removed_item = element
@@ -115,7 +121,7 @@ class PickerWindow(Adw.ApplicationWindow):
                 action_name="win.restore-element")
         )
 
-        self.checkFileContent()
+        self.checkFileSaved()
 
     def onChosenDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
@@ -194,9 +200,9 @@ class PickerWindow(Adw.ApplicationWindow):
         self.currentFileContent = self.getElements()
         self.currentFileTitle = display_name
 
-        self.checkFileContent()
+        self.checkFileSaved()
 
-    def checkFileContent(self):
+    def checkFileSaved(self):
         if self.getElements() == self.currentFileContent:
             self.set_title(f"{self.currentFileTitle} - Picker")
             self.currentFileIsSaved = True
