@@ -60,11 +60,6 @@ class PickerWindow(Adw.ApplicationWindow):
             self.entryRow.set_show_apply_button(True)
 
     def onChooseElement(self, widget, __):
-        elements = []
-        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
-        while child is not None:
-            elements.append(child)
-            child = child.get_next_sibling()
         chosenElement = ""
 
         dialog = Adw.AlertDialog()
@@ -72,12 +67,12 @@ class PickerWindow(Adw.ApplicationWindow):
         dialog.add_response("dismiss", _("Okay"))
         dialog.set_default_response("dismiss")
 
-        if elements == []:
+        if (elements := self.getElements()) == []:
             dialog.set_heading(_("Nothing to Choose"))
             dialog.set_body(_("Please enter some things to be chosen from."))
         else:
-            chosenElement = choice(elements)
-            dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
+            chosenElement = choice(elements.splitlines())
+            dialog.set_heading(chosenElement.replace("&amp;", "&"))
             dialog.set_body(_("has been chosen!"))
             dialog.add_response("copy", _("Copy"))
             dialog.set_response_appearance("copy",
@@ -86,7 +81,7 @@ class PickerWindow(Adw.ApplicationWindow):
             dialog.set_response_appearance("remove",
                                            Adw.ResponseAppearance.DESTRUCTIVE)
 
-        dialog.choose(self, None, self.onDialogResponse, chosenElement)
+        dialog.choose(self, None, self.onChosenDialogResponse, chosenElement)
 
     def onRestoreElement(self, widget, _):
         self.addElement(self.latest_removed_item)
@@ -122,7 +117,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
         self.checkFileContent()
 
-    def onDialogResponse(self, dialog, task, element):
+    def onChosenDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
         if response == "copy":
             Gdk.Display.get_default().get_clipboard().set(element.get_title())
@@ -134,45 +129,6 @@ class PickerWindow(Adw.ApplicationWindow):
         file = dialog.open_finish(result)
         if file is not None:
             file.load_contents_async(None, self.openFileComplete)
-
-    def onSaveFileResponse(self, dialog, result):
-        file = dialog.save_finish(result)
-        if file is not None:
-            self.saveFile(file)
-
-    def saveFile(self, file):
-            elements = []
-            child = self.entryRow.get_parent().get_first_child().get_next_sibling()
-            while child is not None:
-                elements.append(child.get_title().replace("&amp;", "&"))
-                child = child.get_next_sibling()
-
-            bytes = GLib.Bytes.new("\n".join(elements).encode("utf-8"))
-            file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
-
-    def saveFileComplete(self, file, result):
-        res = file.replace_contents_finish(result)
-        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
-        if info:
-            display_name = info.get_attribute_string("standard::display-name")
-        else:
-            display_name = file.get_basename()
-
-        if not res:
-            self.toast_overlay.add_toast("Unable to save file")
-            return
-
-        elements = []
-        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
-        while child is not None:
-            elements.append(child.get_title().replace("&amp;", "&"))
-            child = child.get_next_sibling()
-
-        self.currentFile = file.peek_path()
-        self.currentFileContent = "\n".join(elements)
-        self.currentFileTitle = display_name
-
-        self.checkFileContent()
 
     def openFileComplete(self, file, result):
         contents = file.load_contents_finish(result)
@@ -211,21 +167,51 @@ class PickerWindow(Adw.ApplicationWindow):
 
             actionRow.add_suffix(removeButton)
 
-            self.addElement(actionRow)
+            self.elementsList.add(actionRow)
+
+    def onSaveFileResponse(self, dialog, result):
+        file = dialog.save_finish(result)
+        if file is not None:
+            self.saveFile(file)
+
+    def saveFile(self, file):
+        bytes = GLib.Bytes.new(self.getElements().encode("utf-8"))
+        file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
+
+    def saveFileComplete(self, file, result):
+        res = file.replace_contents_finish(result)
+        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        if info:
+            display_name = info.get_attribute_string("standard::display-name")
+        else:
+            display_name = file.get_basename()
+
+        if not res:
+            self.toast_overlay.add_toast("Unable to save file")
+            return
+
+        self.currentFile = file.peek_path()
+        self.currentFileContent = self.getElements()
+        self.currentFileTitle = display_name
+
+        self.checkFileContent()
 
     def checkFileContent(self):
+        if self.getElements() == self.currentFileContent:
+            self.set_title(f"{self.currentFileTitle} - Picker")
+            self.currentFileIsSaved = True
+        else:
+            self.set_title(f"• {self.currentFileTitle} - Picker")
+            self.currentFileIsSaved = False
+
+    def getElements(self):
         elements = []
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
             elements.append(child.get_title().replace("&amp;", "&"))
             child = child.get_next_sibling()
 
-        if "\n".join(elements) == self.currentFileContent:
-            self.set_title(f"{self.currentFileTitle} - Picker")
-            self.currentFileIsSaved = True
-        else:
-            self.set_title(f"• {self.currentFileTitle} - Picker")
-            self.currentFileIsSaved = False
+        return "\n".join(elements)
 
     def createAction(self, name, callback):
         action = Gio.SimpleAction.new(name, None)
