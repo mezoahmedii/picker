@@ -139,13 +139,13 @@ class PickerWindow(Adw.ApplicationWindow):
     def openFileComplete(self, file, result):
         contents = file.load_contents_finish(result)
         if not contents[0]:
-            self.toast_overlay.add_toast(Adw.Toast(title=f"Unable to open file: {contents[1]}"))
+            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to open file: ") + {contents[1]}))
             return
 
         try:
             text = contents[1].decode('utf-8')
         except UnicodeError as err:
-            self.toast_overlay.add_toast(Adw.Toast(title="The file isn't encoded properly"))
+            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to open file: The file isn't encoded properly")))
             return
 
         info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
@@ -193,7 +193,7 @@ class PickerWindow(Adw.ApplicationWindow):
             display_name = file.get_basename()
 
         if not res:
-            self.toast_overlay.add_toast(Adw.Toast(title="Unable to save file"))
+            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to save file")))
             return
 
         self.currentFile = file.peek_path()
@@ -204,10 +204,10 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def checkFileSaved(self):
         if self.getElements() == self.currentFileContent:
-            self.set_title(f"{self.currentFileTitle} - Picker")
+            self.set_title(f"{self.currentFileTitle} -" + _("Picker"))
             self.currentFileIsSaved = True
         else:
-            self.set_title(f"• {self.currentFileTitle} - Picker")
+            self.set_title(f"• {self.currentFileTitle} -" + _("Picker"))
             self.currentFileIsSaved = False
 
     def getElements(self):
