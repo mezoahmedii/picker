@@ -17,6 +17,9 @@ class PickerWindow(Adw.ApplicationWindow):
     currentFileTitle = "New File"
     currentFileContent = ""
     currentFileIsSaved = True
+    action = None
+    loadedFile = None
+    loadedFileText = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -38,12 +41,14 @@ class PickerWindow(Adw.ApplicationWindow):
         self.createAction("save-file", self.onSaveFile)
         self.createAction("save-file-as", self.onSaveFileAs)
 
-        self.entryRow.connect("apply", self.onEnterElement, _)
+        self.entryRow.connect("apply", self.onEnterElement)
         self.elementsList.add(self.entryRow)
+
+        self.connect("close-request", self.onCloseApp)
 
         self.checkFileSaved()
 
-    def onEnterElement(self, widget, _):
+    def onEnterElement(self, widget):
         if bool(self.entryRow.get_text().strip()):
             actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
 
@@ -89,10 +94,10 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog.choose(self, None, self.onChosenDialogResponse, chosenElement)
 
-    def onRestoreElement(self, widget, _):
+    def onRestoreElement(self, widget, __):
         self.addElement(self.latest_removed_item)
 
-    def onOpenFile(self, widget, _):
+    def onOpenFile(self, widget, __):
         native = Gtk.FileDialog()
         native.open(self, None, self.onOpenFileResponse)
 
@@ -105,6 +110,12 @@ class PickerWindow(Adw.ApplicationWindow):
     def onSaveFileAs(self, widget, __):
         native = Gtk.FileDialog()
         native.save(self, None, self.onSaveFileResponse)
+
+    def onCloseApp(self, __):
+        if not self.currentFileIsSaved and not self.action:
+            self.action = self.close
+            self.saveAlert()
+            return True
 
     def addElement(self, element):
         self.elementsList.add(element)
@@ -148,23 +159,31 @@ class PickerWindow(Adw.ApplicationWindow):
             self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to open file: The file isn't encoded properly")))
             return
 
-        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
-        if info:
-            display_name = info.get_attribute_string("standard::display-name")
+        self.loadedFile = file
+        self.loadedFileText = contents[1]
+        if self.currentFileIsSaved:
+            self.loadFile()
         else:
-            display_name = file.get_basename()
+            self.action = self.loadFile
+            self.saveAlert()
+
+    def loadFile(self):
+        info = self.loadedFile.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        if info:
+            self.currentFileTitle = info.get_attribute_string("standard::display-name")
+        else:
+            self.currentFileTitle = self.loadedFile.get_basename()
         self.set_title(display_name)
 
-        self.currentFile = file.peek_path()
-        self.currentFileContent = text
-        self.currentFileTitle = display_name
+        self.currentFile = self.loadedFile.peek_path()
+        self.currentFileContent = self.loadedFileText.decode("utf-8")
 
         child = self.entryRow.get_parent().get_last_child().get_prev_sibling()
         while child is not None:
             self.elementsList.remove(child.get_next_sibling())
             child = child.get_prev_sibling()
 
-        for element in text.splitlines():
+        for element in self.loadedFileText.decode("utf-8").splitlines():
             actionRow = Adw.ActionRow(title=element.replace("&", "&amp;"))
 
             removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
@@ -178,36 +197,78 @@ class PickerWindow(Adw.ApplicationWindow):
     def onSaveFileResponse(self, dialog, result):
         file = dialog.save_finish(result)
         if file is not None:
+            if self.getElements() == "":
+                self.currentFile = file.peek_path()
+                self.currentFileTitle = file.get_basename()
+
             self.saveFile(file)
 
     def saveFile(self, file):
+        if self.getElements() == "":
+            self.currentFileContent = ""
+            self.checkFileSaved()
+
+            if self.action:
+                self.action()
+                self.action = None
+
         bytes = GLib.Bytes.new(self.getElements().encode("utf-8"))
         file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
 
     def saveFileComplete(self, file, result):
         res = file.replace_contents_finish(result)
-        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
-        if info:
-            display_name = info.get_attribute_string("standard::display-name")
-        else:
-            display_name = file.get_basename()
-
         if not res:
             self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to save file")))
             return
 
+        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        if info:
+            self.currentFileTitle = info.get_attribute_string("standard::display-name")
+        else:
+            self.currentFileTitle = file.get_basename()
+
         self.currentFile = file.peek_path()
         self.currentFileContent = self.getElements()
-        self.currentFileTitle = display_name
+
+        if self.action:
+            self.action()
+            self.action = None
 
         self.checkFileSaved()
 
+    def saveAlert(self):
+        dialog = Adw.AlertDialog()
+
+        dialog.set_heading(_("Save Changes?"))
+        dialog.set_body(_("Any unsaved changes will be lost."))
+
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("discard", _("Discard"))
+        dialog.set_response_appearance("discard",
+                                       Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.add_response("save", _("Save"))
+        dialog.set_response_appearance("save",
+                                        Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response("save")
+
+        dialog.choose(self, None, self.onSaveAlertResponse)
+
+    def onSaveAlertResponse(self, dialog, event):
+        response = dialog.choose_finish(event)
+        if response == "close":
+            self.action = None
+        if response == "discard":
+            self.action()
+            self.action = None
+        if response == "save":
+            Gio.ActionMap.lookup_action(self, "save-file").activate()
+
     def checkFileSaved(self):
         if self.getElements() == self.currentFileContent:
-            self.set_title(f"{self.currentFileTitle} -" + _("Picker"))
+            self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
             self.currentFileIsSaved = True
         else:
-            self.set_title(f"• {self.currentFileTitle} -" + _("Picker"))
+            self.set_title(f"• {self.currentFileTitle} - " + _("Picker"))
             self.currentFileIsSaved = False
 
     def getElements(self):
