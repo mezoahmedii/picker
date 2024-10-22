@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the picker package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: picker\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-25 21:56+0200\n"
+"POT-Creation-Date: 2024-10-21 21:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,99 +17,96 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.py:36 src/window.blp:5 src/window.blp:25
+#: src/main.py:39 src/window.py:268 src/window.py:271
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
+#: src/window.blp:31
 msgid "Picker"
 msgstr ""
 
-#: src/window.py:14
+#: src/window.py:13
 msgid "Add something…"
 msgstr ""
 
-#: src/window.py:65
+#: src/window.py:78
 msgid "Okay"
 msgstr ""
 
-#: src/window.py:69
+#: src/window.py:82
 msgid "Nothing to Choose"
 msgstr ""
 
-#: src/window.py:70
+#: src/window.py:83
 msgid "Please enter some things to be chosen from."
 msgstr ""
 
-#: src/window.py:74
+#: src/window.py:87
 msgid "has been chosen!"
 msgstr ""
 
-#: src/window.py:75
+#: src/window.py:88
 msgid "Copy"
 msgstr ""
 
-#: src/window.py:78
+#: src/window.py:91
 msgid "Remove"
 msgstr ""
 
-#: src/window.py:95
+#: src/window.py:130
 msgid "Removed item from the list"
 msgstr ""
 
-#: src/window.py:96
+#: src/window.py:131
 msgid "Undo"
 msgstr ""
 
-#: src/window.py:104
+#: src/window.py:141
 msgid "Copied item to clipboard"
 msgstr ""
 
-#: src/window.blp:19
-msgid "Menu"
+#: src/window.py:153
+msgid "Unable to open file: "
 msgstr ""
 
-#: src/window.blp:26 data/io.github.mezoahmedii.Picker.desktop.in:8
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
+#: src/window.py:159
+msgid "Unable to open file: The file isn't encoded properly"
+msgstr ""
+
+#: src/window.py:221
+msgid "Unable to save file"
+msgstr ""
+
+#: src/window.py:242
+msgid "Save Changes?"
+msgstr ""
+
+#: src/window.py:243
+msgid "Any unsaved changes will be lost."
+msgstr ""
+
+#: src/window.py:245
+msgid "Cancel"
+msgstr ""
+
+#: src/window.py:246
+msgid "Discard"
+msgstr ""
+
+#: src/window.py:249 src/window.blp:74
+msgid "Save"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.desktop.in:8 src/window.blp:32
 msgid "Randomly pick something to do"
-msgstr ""
-
-#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:46
-msgid "_Choose"
-msgstr ""
-
-#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:69
-msgid "_Keyboard Shortcuts"
-msgstr ""
-
-#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:75
-msgid "_About Picker"
-msgstr ""
-
-#: src/gtk/help-overlay.blp:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr ""
-
-#: src/gtk/help-overlay.blp:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr ""
-
-#: src/gtk/help-overlay.blp:19
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr ""
-
-#: src/gtk/help-overlay.blp:24
-msgctxt "shortcut window"
-msgid "Choose an Item"
 msgstr ""
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.mezoahmedii.Picker.desktop.in:12
 msgid "picker;spin;choose;random;"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
+msgid "Randomly pick somthing to do"
 msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
@@ -153,4 +150,31 @@ msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
 msgid "The first version of the app."
+msgstr ""
+
+#: src/window.blp:18
+msgid "Open"
+msgstr ""
+
+#: src/window.blp:25
+msgid "Menu"
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:52
+msgid "_Choose"
+msgstr ""
+
+#: src/window.blp:79
+msgid "Save As..."
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:86
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:92
+msgid "_About Picker"
 msgstr ""

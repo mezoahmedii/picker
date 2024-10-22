@@ -18,6 +18,9 @@ class PickerApplication(Adw.Application):
         self.create_action('about', self.on_about_action)
 
         self.set_accels_for_action('win.choose-element', ['<primary>Return'])
+        self.set_accels_for_action('win.open-file', ['<primary>o'])
+        self.set_accels_for_action('win.save-file', ['<primary>s'])
+        self.set_accels_for_action('win.save-file-as', ['<primary><shift>s'])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -38,7 +41,7 @@ class PickerApplication(Adw.Application):
                                 developer_name='MezoAhmedII',
                                 website="https://github.com/mezoahmedii/picker",
                                 issue_url="https://github.com/mezoahmedii/picker/issues",
-                                version='1.0.2',
+                                version='1.1.0',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII',
                                 license_type=Gtk.License.GPL_3_0)

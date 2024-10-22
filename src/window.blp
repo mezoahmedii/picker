@@ -12,6 +12,12 @@ template $PickerWindow : Adw.ApplicationWindow {
     child: Adw.ToolbarView {
       [top]
       Adw.HeaderBar header_bar {
+        [start]
+        Button {
+          action-name: "win.open-file";
+          label: _("Open");
+        }
+
         [end]
         MenuButton {
           primary: true;
@@ -63,6 +69,17 @@ template $PickerWindow : Adw.ApplicationWindow {
 }
 
 menu primary_menu {
+  section {
+    item {
+      label: _("Save");
+      action: "win.save-file";
+    }
+
+    item {
+      label: _("Save As...");
+      action: "win.save-file-as";
+    }
+  }
   section {
     item {
       // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
