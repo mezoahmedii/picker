@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 21:34-0400\n"
+"POT-Creation-Date: 2024-10-22 18:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/main.py:39 src/window.py:268 src/window.py:271
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
-#: src/window.blp:31
+#: src/window.blp:31 src/window.py:176
 msgid "Picker"
 msgstr ""
 

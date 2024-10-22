@@ -20,7 +20,7 @@ msgstr ""
 #: src/main.py:39 src/window.py:268 src/window.py:271
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
-#: src/window.blp:31
+#: src/window.blp:31 src/window.py:176
 msgid "Picker"
 msgstr "Causidor"
 
