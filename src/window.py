@@ -173,7 +173,7 @@ class PickerWindow(Adw.ApplicationWindow):
             self.currentFileTitle = info.get_attribute_string("standard::display-name")
         else:
             self.currentFileTitle = self.loadedFile.get_basename()
-        self.set_title(display_name)
+        self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
 
         self.currentFile = self.loadedFile.peek_path()
         self.currentFileContent = self.loadedFileText.decode("utf-8")
