@@ -23,11 +23,11 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/mezoahmedii/picker/blob/v1.1.0/screenshots/x86_64/adding.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.1.1/screenshots/x86_64/adding.png?raw=true</image>
       <caption>Adding items to the list</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/mezoahmedii/picker/blob/v1.1.0/screenshots/x86_64/choosing.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.1.1/screenshots/x86_64/choosing.png?raw=true</image>
       <caption>Showing chosen item</caption>
     </screenshot>
   </screenshots>
@@ -42,8 +42,16 @@
   </branding>
 
   <releases>
+    <release version="1.1.0" date="2024-10-22">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.1.1</url>
+      <description>
+        <ul>
+          <li>Fixed a bug with opening files</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2024-10-21">
-      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.0.2</url>
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.1.0</url>
       <description>
         <ul>
           <li>Added the ability to open and save files</li>
