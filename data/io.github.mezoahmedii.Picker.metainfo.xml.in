@@ -3,7 +3,7 @@
   <id>io.github.mezoahmedii.Picker</id>
   <launchable type="desktop-id">io.github.mezoahmedii.Picker.desktop</launchable>
   <name>Picker</name>
-  <summary>Randomly pick somthing to do</summary>
+  <summary>Randomly pick something to do</summary>
 
   <developer id="io.github.mezoahmedii">
     <name>MezoAhmedII</name>
