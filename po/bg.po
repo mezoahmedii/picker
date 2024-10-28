@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: picker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-22 18:14-0400\n"
+"PO-Revision-Date: 2024-10-29 00:14+0100\n"
+"Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 46.1\n"
+
+#: src/main.py:39 src/window.py:268 src/window.py:271
+#: data/io.github.mezoahmedii.Picker.desktop.in:7
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
+#: src/window.blp:31 src/window.py:176
+msgid "Picker"
+msgstr "Колело на късмета"
+
+#: src/window.py:13
+msgid "Add something…"
+msgstr "Добавете нещо…"
+
+#: src/window.py:78
+msgid "Okay"
+msgstr "Добре"
+
+#: src/window.py:82
+msgid "Nothing to Choose"
+msgstr "Няма нищо за избиране"
+
+#: src/window.py:83
+msgid "Please enter some things to be chosen from."
+msgstr "Моля, въведете някои неща, от които да се избира."
+
+#: src/window.py:87
+msgid "has been chosen!"
+msgstr "е избрано!"
+
+#: src/window.py:88
+msgid "Copy"
+msgstr "Копиране"
+
+#: src/window.py:91
+msgid "Remove"
+msgstr "Премахване"
+
+#: src/window.py:130
+msgid "Removed item from the list"
+msgstr "Елементът е премахнат от списъка"
+
+#: src/window.py:131
+msgid "Undo"
+msgstr "Отменяне"
+
+#: src/window.py:141
+msgid "Copied item to clipboard"
+msgstr "Елементът е копиран в буфера за обмен"
+
+#: src/window.py:153
+msgid "Unable to open file: "
+msgstr "Файлът не може да бъде отворен: "
+
+#: src/window.py:159
+msgid "Unable to open file: The file isn't encoded properly"
+msgstr "Файлът не може да бъде отворен: Файлър не е правилно кодиран"
+
+#: src/window.py:221
+msgid "Unable to save file"
+msgstr "Файлът не може да бъде запазен"
+
+#: src/window.py:242
+msgid "Save Changes?"
+msgstr "Запазване на промените?"
+
+#: src/window.py:243
+msgid "Any unsaved changes will be lost."
+msgstr "Незапазените промени ще бъдат изгубени."
+
+#: src/window.py:245
+msgid "Cancel"
+msgstr "Отказване"
+
+#: src/window.py:246
+msgid "Discard"
+msgstr "Отхвърляне"
+
+#: src/window.py:249 src/window.blp:74
+msgid "Save"
+msgstr "Запазване"
+
+#: data/io.github.mezoahmedii.Picker.desktop.in:8 src/window.blp:32
+msgid "Randomly pick something to do"
+msgstr "Изберете нещо за правене на случаен принцип"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.mezoahmedii.Picker.desktop.in:12
+msgid "picker;spin;choose;random;"
+msgstr "колело на късмета;завъртане;избиране;произволно;"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
+msgid "Randomly pick somthing to do"
+msgstr "Изберете нещо за правене на случаен принцип"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
+msgid "MezoAhmedII"
+msgstr "MezoAhmedII"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:17
+msgid ""
+"Picker is a simple app that can pick something for you from a list of "
+"things. For example, if you can't decide what to have for dinner, put your "
+"favorite meals in and let the Picker choose one for you."
+msgstr ""
+"„Колело на късмета“ е проста програма, която може да избере нещо за вас от "
+"списък с неща. Например, ако не може да решите какво да вечеряте, изброете "
+"любимите си ястия и оставете „Колело на късмета“ да избере едно от тях "
+"вместо вас."
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:27
+msgid "Adding items to the list"
+msgstr "Добавяне на елементи в списъка"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:31
+msgid "Showing chosen item"
+msgstr "Показване на избрания елемент"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
+msgid "Fixed a bug where something containing \"&amp;\" would not show up"
+msgstr "Поправена е грешка, при която нещо, съдържащо „&amp;“, не се показваше"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:50
+msgid "Updated app info and screenshots to fit guidelines"
+msgstr ""
+"Информацията за програмата и снимките на екрани са обновени, за да отговарят "
+"на указанията"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:51
+msgid "Added translation files"
+msgstr "Добавени са файлове за превод"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:59
+msgid "Fixed a small bug in the symbolic icon"
+msgstr "Поправена е малка грешка в символичната икона"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:60
+msgid "Changed some stuff in the build process"
+msgstr "Променени са някои неща в процеса на изграждане"
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+msgid "The first version of the app."
+msgstr "Първа версия на програмата."
+
+#: src/window.blp:18
+msgid "Open"
+msgstr "Отваряне"
+
+#: src/window.blp:25
+msgid "Menu"
+msgstr "Меню"
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:52
+msgid "_Choose"
+msgstr "_Избиране"
+
+#: src/window.blp:79
+msgid "Save As..."
+msgstr "Запазване като…"
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:86
+msgid "_Keyboard Shortcuts"
+msgstr "_Клавишни комбинации"
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:92
+msgid "_About Picker"
+msgstr "_Относно „Колело на късмета“"
