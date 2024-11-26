@@ -98,7 +98,11 @@ class PickerWindow(Adw.ApplicationWindow):
         self.addElement(self.latest_removed_item)
 
     def onOpenFile(self, widget, __):
-        native = Gtk.FileDialog()
+        filters = Gio.ListStore()
+        filters.append(Gtk.FileFilter(name="Text Files", mime_types=["plain/text"]))
+        filters.append(Gtk.FileFilter(name="All Files", patterns=["*"]))
+
+        native = Gtk.FileDialog(filters=filters)
         native.open(self, None, self.onOpenFileResponse)
 
     def onSaveFile(self, widget, __):
