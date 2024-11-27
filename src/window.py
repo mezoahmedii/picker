@@ -99,8 +99,8 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onOpenFile(self, widget, __):
         filters = Gio.ListStore()
-        filters.append(Gtk.FileFilter(name="Text Files", mime_types=["plain/text"]))
-        filters.append(Gtk.FileFilter(name="All Files", patterns=["*"]))
+        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["plain/text"]))
+        filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
         native = Gtk.FileDialog(filters=filters)
         native.open(self, None, self.onOpenFileResponse)
@@ -112,7 +112,11 @@ class PickerWindow(Adw.ApplicationWindow):
             self.saveFile(Gio.File.new_for_path(self.currentFile))
 
     def onSaveFileAs(self, widget, __):
-        native = Gtk.FileDialog()
+        filters = Gio.ListStore()
+        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["plain/text"]))
+        filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
+
+        native = Gtk.FileDialog(filters=filters, initial_name="New File.txt")
         native.save(self, None, self.onSaveFileResponse)
 
     def onCloseApp(self, __):
