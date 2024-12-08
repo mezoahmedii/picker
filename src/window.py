@@ -9,6 +9,7 @@ class PickerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickerWindow'
 
     toast_overlay = Gtk.Template.Child()
+    header_bar = Gtk.Template.Child()
     elementsList = Gtk.Template.Child()
     entryRow = Adw.EntryRow(title=_("Add something…"), show_apply_button=True)
 
@@ -43,6 +44,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
         self.entryRow.connect("apply", self.onEnterElement)
         self.elementsList.add(self.entryRow)
+        self.header_bar.set_title_widget(Adw.WindowTitle())
 
         self.connect("close-request", self.onCloseApp)
 
@@ -99,7 +101,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onOpenFile(self, widget, __):
         filters = Gio.ListStore()
-        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["plain/text"]))
+        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["text/plain"]))
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
         native = Gtk.FileDialog(filters=filters)
@@ -113,7 +115,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onSaveFileAs(self, widget, __):
         filters = Gio.ListStore()
-        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["plain/text"]))
+        filters.append(Gtk.FileFilter(name=_("Text Files"), mime_types=["text/plain"]))
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
         native = Gtk.FileDialog(filters=filters, initial_name="New File.txt")
@@ -181,7 +183,6 @@ class PickerWindow(Adw.ApplicationWindow):
             self.currentFileTitle = info.get_attribute_string("standard::display-name")
         else:
             self.currentFileTitle = self.loadedFile.get_basename()
-        self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
 
         self.currentFile = self.loadedFile.peek_path()
         self.currentFileContent = self.loadedFileText.decode("utf-8")
@@ -201,6 +202,9 @@ class PickerWindow(Adw.ApplicationWindow):
             actionRow.add_suffix(removeButton)
 
             self.elementsList.add(actionRow)
+
+        self.currentFileContent = self.getElements()
+        self.checkFileSaved()
 
     def onSaveFileResponse(self, dialog, result):
         file = dialog.save_finish(result)
@@ -274,9 +278,11 @@ class PickerWindow(Adw.ApplicationWindow):
     def checkFileSaved(self):
         if self.getElements() == self.currentFileContent:
             self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
+            self.header_bar.get_title_widget().set_title(f"{self.currentFileTitle}")
             self.currentFileIsSaved = True
         else:
             self.set_title(f"• {self.currentFileTitle} - " + _("Picker"))
+            self.header_bar.get_title_widget().set_title(f"• {self.currentFileTitle}")
             self.currentFileIsSaved = False
 
     def getElements(self):
