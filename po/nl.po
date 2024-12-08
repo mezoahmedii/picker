@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 18:14-0400\n"
+"POT-Creation-Date: 2024-12-08 13:48-0500\n"
 "PO-Revision-Date: 2024-11-08 21:48+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -18,86 +18,95 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: src/main.py:39 src/window.py:268 src/window.py:271
+#: src/main.py:39 src/window.py:280 src/window.py:284
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
-#: src/window.blp:31 src/window.py:176
+#: src/window.blp:31
 msgid "Picker"
 msgstr "Keuzemaker"
 
-#: src/window.py:13
+#: src/window.py:14
 msgid "Add something…"
 msgstr "Voeg iets toe…"
 
-#: src/window.py:78
+#: src/window.py:80
 msgid "Okay"
 msgstr "Oké"
 
-#: src/window.py:82
+#: src/window.py:84
 msgid "Nothing to Choose"
 msgstr "Er valt niks te kiezen"
 
-#: src/window.py:83
+#: src/window.py:85
 msgid "Please enter some things to be chosen from."
 msgstr "Voer items toe om uit te kiezen."
 
-#: src/window.py:87
+#: src/window.py:89
 msgid "has been chosen!"
 msgstr "is gekozen!"
 
-#: src/window.py:88
+#: src/window.py:90
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/window.py:91
+#: src/window.py:93
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/window.py:130
+#: src/window.py:104 src/window.py:118
+msgid "Text Files"
+msgstr ""
+
+#: src/window.py:105 src/window.py:119
+msgid "All Files"
+msgstr ""
+
+#: src/window.py:140
 msgid "Removed item from the list"
 msgstr "Het item is van de lijst verwijderd"
 
-#: src/window.py:131
+#: src/window.py:141
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/window.py:141
+#: src/window.py:151
 msgid "Copied item to clipboard"
 msgstr "Het item is gekopieerd naar het klembord"
 
-#: src/window.py:153
+#: src/window.py:163
 msgid "Unable to open file: "
 msgstr "Het bestand kan niet worden geopend: "
 
-#: src/window.py:159
+#: src/window.py:169
 msgid "Unable to open file: The file isn't encoded properly"
 msgstr "Het bestand kan niet worden geopend: onjuiste encodering"
 
-#: src/window.py:221
+#: src/window.py:233
 msgid "Unable to save file"
 msgstr "Het bestand kan niet worden opgeslagen"
 
-#: src/window.py:242
+#: src/window.py:254
 msgid "Save Changes?"
 msgstr "Wil je de wĳzigingen opslaan?"
 
-#: src/window.py:243
+#: src/window.py:255
 msgid "Any unsaved changes will be lost."
 msgstr "Alle niet-opgeslagen wijzigingen worden gewist."
 
-#: src/window.py:245
+#: src/window.py:257
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/window.py:246
+#: src/window.py:258
 msgid "Discard"
 msgstr "Wissen"
 
-#: src/window.py:249 src/window.blp:74
+#: src/window.py:261 src/window.blp:74
 msgid "Save"
 msgstr "Opslaan"
 
-#: data/io.github.mezoahmedii.Picker.desktop.in:8 src/window.blp:32
+#: data/io.github.mezoahmedii.Picker.desktop.in:8
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6 src/window.blp:32
 msgid "Randomly pick something to do"
 msgstr "Kies een willekeurig iets om te doen"
 
@@ -105,10 +114,6 @@ msgstr "Kies een willekeurig iets om te doen"
 #: data/io.github.mezoahmedii.Picker.desktop.in:12
 msgid "picker;spin;choose;random;"
 msgstr "kiezer;keuze;draaien;kiezen;willekeurig;random;"
-
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
-msgid "Randomly pick somthing to do"
-msgstr "Kies een willekeurig iets om te doen"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
 msgid "MezoAhmedII"
@@ -121,8 +126,8 @@ msgid ""
 "favorite meals in and let the Picker choose one for you."
 msgstr ""
 "Met keuzemaker kun je snel willekeurige beslissingen maken. Als je "
-"bijvoorbeeld niet weet wat je wilt eten, voer dan je favoriete maaltijden "
-"in en laat Keuzemaker al het werk doen."
+"bijvoorbeeld niet weet wat je wilt eten, voer dan je favoriete maaltijden in "
+"en laat Keuzemaker al het werk doen."
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:27
 msgid "Adding items to the list"
@@ -133,26 +138,46 @@ msgid "Showing chosen item"
 msgstr "Tonen van een gekozen item"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
+msgid "Added file chooser filter"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:57
+msgid "Fixed a bug with opening files"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:65
+msgid "Added the ability to open and save files"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:66
+msgid "Added Occitan translaton"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+msgid "Internal code changes"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:75
 msgid "Fixed a bug where something containing \"&amp;\" would not show up"
 msgstr "Opgelost: bug waardoor items met “&amp;” niet werden getoond"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:50
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:76
 msgid "Updated app info and screenshots to fit guidelines"
 msgstr "Bijgewerkt: toepassingsinformatie en schermfoto's"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:51
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:77
 msgid "Added translation files"
 msgstr "Nieuw: vertalingen"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:59
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:85
 msgid "Fixed a small bug in the symbolic icon"
 msgstr "Opgelost: kleine bug in symbolisch pictogram"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:60
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:86
 msgid "Changed some stuff in the build process"
 msgstr "Gewijzigd: enkele dingen in het compilatieproces"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:93
 msgid "The first version of the app."
 msgstr "De allereerste versie."
 
@@ -182,3 +207,6 @@ msgstr "_Sneltoetsen"
 #: src/window.blp:92
 msgid "_About Picker"
 msgstr "_Over Keuzemaker"
+
+#~ msgid "Randomly pick somthing to do"
+#~ msgstr "Kies een willekeurig iets om te doen"

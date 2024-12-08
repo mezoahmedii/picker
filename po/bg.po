@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: picker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 18:14-0400\n"
+"POT-Creation-Date: 2024-12-08 13:48-0500\n"
 "PO-Revision-Date: 2024-10-29 00:14+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
@@ -19,86 +19,95 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Generator: Gtranslator 46.1\n"
 
-#: src/main.py:39 src/window.py:268 src/window.py:271
+#: src/main.py:39 src/window.py:280 src/window.py:284
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
-#: src/window.blp:31 src/window.py:176
+#: src/window.blp:31
 msgid "Picker"
 msgstr "Колело на късмета"
 
-#: src/window.py:13
+#: src/window.py:14
 msgid "Add something…"
 msgstr "Добавете нещо…"
 
-#: src/window.py:78
+#: src/window.py:80
 msgid "Okay"
 msgstr "Добре"
 
-#: src/window.py:82
+#: src/window.py:84
 msgid "Nothing to Choose"
 msgstr "Няма нищо за избиране"
 
-#: src/window.py:83
+#: src/window.py:85
 msgid "Please enter some things to be chosen from."
 msgstr "Моля, въведете някои неща, от които да се избира."
 
-#: src/window.py:87
+#: src/window.py:89
 msgid "has been chosen!"
 msgstr "е избрано!"
 
-#: src/window.py:88
+#: src/window.py:90
 msgid "Copy"
 msgstr "Копиране"
 
-#: src/window.py:91
+#: src/window.py:93
 msgid "Remove"
 msgstr "Премахване"
 
-#: src/window.py:130
+#: src/window.py:104 src/window.py:118
+msgid "Text Files"
+msgstr ""
+
+#: src/window.py:105 src/window.py:119
+msgid "All Files"
+msgstr ""
+
+#: src/window.py:140
 msgid "Removed item from the list"
 msgstr "Елементът е премахнат от списъка"
 
-#: src/window.py:131
+#: src/window.py:141
 msgid "Undo"
 msgstr "Отменяне"
 
-#: src/window.py:141
+#: src/window.py:151
 msgid "Copied item to clipboard"
 msgstr "Елементът е копиран в буфера за обмен"
 
-#: src/window.py:153
+#: src/window.py:163
 msgid "Unable to open file: "
 msgstr "Файлът не може да бъде отворен: "
 
-#: src/window.py:159
+#: src/window.py:169
 msgid "Unable to open file: The file isn't encoded properly"
 msgstr "Файлът не може да бъде отворен: Файлър не е правилно кодиран"
 
-#: src/window.py:221
+#: src/window.py:233
 msgid "Unable to save file"
 msgstr "Файлът не може да бъде запазен"
 
-#: src/window.py:242
+#: src/window.py:254
 msgid "Save Changes?"
 msgstr "Запазване на промените?"
 
-#: src/window.py:243
+#: src/window.py:255
 msgid "Any unsaved changes will be lost."
 msgstr "Незапазените промени ще бъдат изгубени."
 
-#: src/window.py:245
+#: src/window.py:257
 msgid "Cancel"
 msgstr "Отказване"
 
-#: src/window.py:246
+#: src/window.py:258
 msgid "Discard"
 msgstr "Отхвърляне"
 
-#: src/window.py:249 src/window.blp:74
+#: src/window.py:261 src/window.blp:74
 msgid "Save"
 msgstr "Запазване"
 
-#: data/io.github.mezoahmedii.Picker.desktop.in:8 src/window.blp:32
+#: data/io.github.mezoahmedii.Picker.desktop.in:8
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6 src/window.blp:32
 msgid "Randomly pick something to do"
 msgstr "Изберете нещо за правене на случаен принцип"
 
@@ -106,10 +115,6 @@ msgstr "Изберете нещо за правене на случаен при
 #: data/io.github.mezoahmedii.Picker.desktop.in:12
 msgid "picker;spin;choose;random;"
 msgstr "колело на късмета;завъртане;избиране;произволно;"
-
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6
-msgid "Randomly pick somthing to do"
-msgstr "Изберете нещо за правене на случаен принцип"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:9
 msgid "MezoAhmedII"
@@ -135,28 +140,48 @@ msgid "Showing chosen item"
 msgstr "Показване на избрания елемент"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
+msgid "Added file chooser filter"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:57
+msgid "Fixed a bug with opening files"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:65
+msgid "Added the ability to open and save files"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:66
+msgid "Added Occitan translaton"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+msgid "Internal code changes"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:75
 msgid "Fixed a bug where something containing \"&amp;\" would not show up"
 msgstr "Поправена е грешка, при която нещо, съдържащо „&amp;“, не се показваше"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:50
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:76
 msgid "Updated app info and screenshots to fit guidelines"
 msgstr ""
 "Информацията за програмата и снимките на екрани са обновени, за да отговарят "
 "на указанията"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:51
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:77
 msgid "Added translation files"
 msgstr "Добавени са файлове за превод"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:59
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:85
 msgid "Fixed a small bug in the symbolic icon"
 msgstr "Поправена е малка грешка в символичната икона"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:60
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:86
 msgid "Changed some stuff in the build process"
 msgstr "Променени са някои неща в процеса на изграждане"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:93
 msgid "The first version of the app."
 msgstr "Първа версия на програмата."
 
@@ -186,3 +211,6 @@ msgstr "_Клавишни комбинации"
 #: src/window.blp:92
 msgid "_About Picker"
 msgstr "_Относно „Колело на късмета“"
+
+#~ msgid "Randomly pick somthing to do"
+#~ msgstr "Изберете нещо за правене на случаен принцип"
