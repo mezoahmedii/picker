@@ -1,5 +1,5 @@
 project('picker',
-          version: '1.1.1',
+          version: '1.1.2',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
@@ -18,4 +18,5 @@ gnome.post_install(
     gtk_update_icon_cache: true,
   update_desktop_database: true,
 )
+
 

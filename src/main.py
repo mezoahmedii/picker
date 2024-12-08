@@ -41,7 +41,7 @@ class PickerApplication(Adw.Application):
                                 developer_name='MezoAhmedII',
                                 website="https://github.com/mezoahmedii/picker",
                                 issue_url="https://github.com/mezoahmedii/picker/issues",
-                                version='1.1.1',
+                                version='1.1.2',
                                 developers=['MezoAhmedII'],
                                 copyright='© 2024 MezoAhmedII',
                                 license_type=Gtk.License.GPL_3_0)
@@ -68,3 +68,4 @@ def main(version):
     """The application's entry point."""
     app = PickerApplication()
     return app.run(sys.argv)
+

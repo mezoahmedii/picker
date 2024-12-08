@@ -23,11 +23,11 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/mezoahmedii/picker/blob/v1.1.1/screenshots/x86_64/adding.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.1.2/screenshots/x86_64/adding.png?raw=true</image>
       <caption>Adding items to the list</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/mezoahmedii/picker/blob/v1.1.1/screenshots/x86_64/choosing.png?raw=true</image>
+      <image>https://github.com/mezoahmedii/picker/blob/v1.1.2/screenshots/x86_64/choosing.png?raw=true</image>
       <caption>Showing chosen item</caption>
     </screenshot>
   </screenshots>
@@ -42,6 +42,14 @@
   </branding>
 
   <releases>
+    <release version="1.1.2" date="2024-10-22">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.1.2</url>
+      <description>
+        <ul>
+          <li>Added file chooser filter</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2024-10-22">
       <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.1.1</url>
       <description>
@@ -87,4 +95,5 @@
     </release>
   </releases>
 </component>
+
 
