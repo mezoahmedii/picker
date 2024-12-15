@@ -16,7 +16,7 @@ class PickerWindow(Adw.ApplicationWindow):
     latest_removed_item = None
     currentFile = ""
     currentFileTitle = "New File"
-    currentFileContent = ""
+    currentFileContent = {"datatype": "raw", "data": []}
     currentFileIsSaved = True
     action = None
     loadedFile = None
@@ -185,7 +185,6 @@ class PickerWindow(Adw.ApplicationWindow):
             self.currentFileTitle = self.loadedFile.get_basename()
 
         self.currentFile = self.loadedFile.peek_path()
-        self.currentFileContent = self.loadedFileText.decode("utf-8")
 
         child = self.entryRow.get_parent().get_last_child().get_prev_sibling()
         while child is not None:
@@ -224,7 +223,7 @@ class PickerWindow(Adw.ApplicationWindow):
                 self.action()
                 self.action = None
 
-        bytes = GLib.Bytes.new(self.getElements().encode("utf-8"))
+        bytes = GLib.Bytes.new(self.convertData(self.getElements(), "plaintext")["data"].encode("utf-8"))
         file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
 
     def saveFileComplete(self, file, result):
@@ -275,8 +274,26 @@ class PickerWindow(Adw.ApplicationWindow):
         if response == "save":
             Gio.ActionMap.lookup_action(self, "save-file").activate()
 
+    def convertData(self, data, datatype):
+        originalType = data["datatype"]
+        if originalType == datatype:
+            return data
+
+        rawData = {"datatype": "raw", "data": []}
+        if originalType == "plaintext":
+            for element in data["data"].splitlines():
+                rawData["data"].append({"name": element})
+
+        if datatype == "raw":
+            return rawData
+        if datatype == "plaintext":
+            elements = []
+            for element in data["data"]:
+                elements.append(element["name"])
+            return {"datatype": "raw", "data": "\n".join(elements)}           
+
     def checkFileSaved(self):
-        if self.getElements() == self.currentFileContent:
+        if self.getElements() == self.convertData(self.currentFileContent, "raw"):
             self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
             self.header_bar.get_title_widget().set_title(f"{self.currentFileTitle}")
             self.currentFileIsSaved = True
@@ -286,13 +303,13 @@ class PickerWindow(Adw.ApplicationWindow):
             self.currentFileIsSaved = False
 
     def getElements(self):
-        elements = []
+        elements = {"datatype": "raw", "data": []}
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
-            elements.append(child.get_title().replace("&amp;", "&"))
+            elements["data"].append({"name": child.get_title().replace("&amp;", "&")})
             child = child.get_next_sibling()
 
-        return "\n".join(elements)
+        return elements
 
     def createAction(self, name, callback):
         action = Gio.SimpleAction.new(name, None)
