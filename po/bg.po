@@ -148,7 +148,7 @@ msgid "Showing chosen item"
 msgstr "Показване на избрания елемент"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
-msgid "Added importing andd exporting to wheelofnames.com wheels"
+msgid "Added importing and exporting to wheelofnames.com wheels"
 msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:57
