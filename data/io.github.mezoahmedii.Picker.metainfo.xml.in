@@ -42,8 +42,16 @@
   </branding>
 
   <releases>
-    <release version="1.2.0" date="2024-12-08">
+    <release version="1.2.0" date="2024-12-15">
       <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.2.0</url>
+      <description>
+        <ul>
+          <li>Added importing andd exporting to wheelofnames.com wheels</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.2" date="2024-12-08">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.1.2</url>
       <description>
         <ul>
           <li>Added file chooser filter</li>
