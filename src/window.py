@@ -2,11 +2,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice
+import json
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
-@Gtk.Template(resource_path='/io/github/mezoahmedii/Picker/window.ui')
+
+@Gtk.Template(resource_path="/io/github/mezoahmedii/Picker/window.ui")
 class PickerWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'PickerWindow'
+    __gtype_name__ = "PickerWindow"
 
     toast_overlay = Gtk.Template.Child()
     header_bar = Gtk.Template.Child()
@@ -16,7 +18,8 @@ class PickerWindow(Adw.ApplicationWindow):
     latest_removed_item = None
     currentFile = ""
     currentFileTitle = "New File"
-    currentFileContent = ""
+    currentFileContent = {"datatype": "raw", "data": []}
+    currentFileType = "plaintext"
     currentFileIsSaved = True
     action = None
     loadedFile = None
@@ -27,20 +30,26 @@ class PickerWindow(Adw.ApplicationWindow):
 
         self.settings = Gio.Settings(schema_id="io.github.mezoahmedii.Picker")
 
-        self.settings.bind("width", self, "default-width",
-                           Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind("height", self, "default-height",
-                           Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind("is-maximized", self, "maximized",
-                           Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind("is-fullscreen", self, "fullscreened",
-                           Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind(
+            "width", self, "default-width", Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "height", self, "default-height", Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "is-maximized", self, "maximized", Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "is-fullscreen", self, "fullscreened", Gio.SettingsBindFlags.DEFAULT
+        )
 
         self.createAction("choose-element", self.onChooseElement)
         self.createAction("restore-element", self.onRestoreElement)
         self.createAction("open-file", self.onOpenFile)
         self.createAction("save-file", self.onSaveFile)
         self.createAction("save-file-as", self.onSaveFileAs)
+        self.createAction("save-file-as-plaintext", self.onSaveFileAsPlaintext)
+        self.createAction("save-file-as-wheelofnames", self.onSaveFileAsWheelofnames)
 
         self.entryRow.connect("apply", self.onEnterElement)
         self.elementsList.add(self.entryRow)
@@ -52,7 +61,9 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onEnterElement(self, widget):
         if bool(self.entryRow.get_text().strip()):
-            actionRow = Adw.ActionRow(title=self.entryRow.get_text().strip().replace("&", "&amp;"))
+            actionRow = Adw.ActionRow(
+                title=self.entryRow.get_text().strip().replace("&", "&amp;")
+            )
 
             removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
             removeButton.get_style_context().add_class("destructive-action")
@@ -60,7 +71,8 @@ class PickerWindow(Adw.ApplicationWindow):
 
             actionRow.add_suffix(removeButton)
 
-            self.addElement(actionRow)
+            self.elementsList.add(actionRow)
+            self.checkFileSaved()
 
             self.entryRow.set_text("")
             self.entryRow.set_show_apply_button(False)
@@ -88,20 +100,21 @@ class PickerWindow(Adw.ApplicationWindow):
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body(_("has been chosen!"))
             dialog.add_response("copy", _("Copy"))
-            dialog.set_response_appearance("copy",
-                                           Adw.ResponseAppearance.SUGGESTED)
+            dialog.set_response_appearance("copy", Adw.ResponseAppearance.SUGGESTED)
             dialog.add_response("remove", _("Remove"))
-            dialog.set_response_appearance("remove",
-                                           Adw.ResponseAppearance.DESTRUCTIVE)
+            dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
 
         dialog.choose(self, None, self.onChosenDialogResponse, chosenElement)
 
     def onRestoreElement(self, widget, __):
-        self.addElement(self.latest_removed_item)
+        self.elementsList.add(self.latest_removed_item)
+        self.checkFileSaved()
 
     def onOpenFile(self, widget, __):
         filters = Gio.ListStore()
-        filters.append(Gtk.FileFilter(name=_("Text Files"), suffixes=["txt"]))
+        filters.append(
+            Gtk.FileFilter(name=_("Supported Files"), suffixes=["txt", "json", "wheel"])
+        )
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
         native = Gtk.FileDialog(filters=filters)
@@ -115,11 +128,29 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onSaveFileAs(self, widget, __):
         filters = Gio.ListStore()
-        filters.append(Gtk.FileFilter(name=_("Text Files"), suffixes=["txt"]))
+        if self.currentFileType == "wheelofnames":
+            filters.append(
+                Gtk.FileFilter(
+                    name=_("Wheel Of Names Wheels"), suffixes=["json", "wheel"]
+                )
+            )
+            initname = "New File.wheel"
+        else:
+            filters.append(Gtk.FileFilter(name=_("Text Files"), suffixes=["txt"]))
+            initname = "New File.txt"
+
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
-        native = Gtk.FileDialog(filters=filters, initial_name="New File.txt")
+        native = Gtk.FileDialog(filters=filters, initial_name=initname)
         native.save(self, None, self.onSaveFileResponse)
+
+    def onSaveFileAsPlaintext(self, widget, __):
+        self.currentFileType = "plaintext"
+        Gio.ActionMap.lookup_action(self, "save-file-as").activate()
+
+    def onSaveFileAsWheelofnames(self, widget, __):
+        self.currentFileType = "wheelofnames"
+        Gio.ActionMap.lookup_action(self, "save-file-as").activate()
 
     def onCloseApp(self, __):
         if not self.currentFileIsSaved and not self.action:
@@ -127,19 +158,16 @@ class PickerWindow(Adw.ApplicationWindow):
             self.saveAlert()
             return True
 
-    def addElement(self, element):
-        self.elementsList.add(element)
-
-        self.checkFileSaved()
-
     def removeElement(self, widget, element):
         self.latest_removed_item = element
         self.elementsList.remove(element)
 
         self.toast_overlay.add_toast(
-            Adw.Toast(title=_("Removed item from the list"),
+            Adw.Toast(
+                title=_("Removed item from the list"),
                 button_label=_("Undo"),
-                action_name="win.restore-element")
+                action_name="win.restore-element",
+            )
         )
 
         self.checkFileSaved()
@@ -160,13 +188,19 @@ class PickerWindow(Adw.ApplicationWindow):
     def openFileComplete(self, file, result):
         contents = file.load_contents_finish(result)
         if not contents[0]:
-            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to open file: ") + {contents[1]}))
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=_("Unable to open file: ") + {contents[1]})
+            )
             return
 
         try:
-            text = contents[1].decode('utf-8')
+            text = contents[1].decode("utf-8")
         except UnicodeError as err:
-            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to open file: The file isn't encoded properly")))
+            self.toast_overlay.add_toast(
+                Adw.Toast(
+                    title=_("Unable to open file: The file isn't encoded properly")
+                )
+            )
             return
 
         self.loadedFile = file
@@ -178,22 +212,43 @@ class PickerWindow(Adw.ApplicationWindow):
             self.saveAlert()
 
     def loadFile(self):
-        info = self.loadedFile.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        info = self.loadedFile.query_info(
+            "standard::display-name", Gio.FileQueryInfoFlags.NONE
+        )
         if info:
             self.currentFileTitle = info.get_attribute_string("standard::display-name")
         else:
             self.currentFileTitle = self.loadedFile.get_basename()
 
         self.currentFile = self.loadedFile.peek_path()
-        self.currentFileContent = self.loadedFileText.decode("utf-8")
+
+        try:
+            fileJson = json.loads(self.loadedFileText)
+            if fileJson["entries"] is not None:
+                self.currentFileType = "wheelofnames"
+            else:
+                self.currentFileType = "plaintext"
+        except:
+            self.currentFileType = "plaintext"
+
+        self.currentFileContent = {
+            "datatype": self.currentFileType,
+            "data": self.loadedFileText.decode("utf-8"),
+        }
 
         child = self.entryRow.get_parent().get_last_child().get_prev_sibling()
         while child is not None:
             self.elementsList.remove(child.get_next_sibling())
             child = child.get_prev_sibling()
 
-        for element in self.loadedFileText.decode("utf-8").splitlines():
-            actionRow = Adw.ActionRow(title=element.replace("&", "&amp;"))
+        for element in self.convertData(
+            {
+                "datatype": self.currentFileType,
+                "data": self.loadedFileText.decode("utf-8"),
+            },
+            "raw",
+        )["data"]:
+            actionRow = Adw.ActionRow(title=element["name"].replace("&", "&amp;"))
 
             removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
             removeButton.get_style_context().add_class("destructive-action")
@@ -203,7 +258,6 @@ class PickerWindow(Adw.ApplicationWindow):
 
             self.elementsList.add(actionRow)
 
-        self.currentFileContent = self.getElements()
         self.checkFileSaved()
 
     def onSaveFileResponse(self, dialog, result):
@@ -224,8 +278,14 @@ class PickerWindow(Adw.ApplicationWindow):
                 self.action()
                 self.action = None
 
-        bytes = GLib.Bytes.new(self.getElements().encode("utf-8"))
-        file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete)
+        bytes = GLib.Bytes.new(
+            self.convertData(self.getElements(), self.currentFileType)["data"].encode(
+                "utf-8"
+            )
+        )
+        file.replace_contents_bytes_async(
+            bytes, None, False, Gio.FileCreateFlags.NONE, None, self.saveFileComplete
+        )
 
     def saveFileComplete(self, file, result):
         res = file.replace_contents_finish(result)
@@ -256,11 +316,9 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("discard", _("Discard"))
-        dialog.set_response_appearance("discard",
-                                       Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.add_response("save", _("Save"))
-        dialog.set_response_appearance("save",
-                                        Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response("save")
 
         dialog.choose(self, None, self.onSaveAlertResponse)
@@ -275,8 +333,47 @@ class PickerWindow(Adw.ApplicationWindow):
         if response == "save":
             Gio.ActionMap.lookup_action(self, "save-file").activate()
 
+    def convertData(self, data, datatype):
+        originalType = data["datatype"]
+        if originalType == datatype:
+            return data
+
+        rawData = {"datatype": "raw", "data": []}
+        if originalType == "raw":
+            rawData = data
+        if originalType == "plaintext":
+            for element in data["data"].splitlines():
+                rawData["data"].append({"name": element})
+        if originalType == "wheelofnames":
+            dataJson = json.loads(data["data"])
+            for element in dataJson["entries"]:
+                rawData["data"].append({"name": element["text"]})
+            rawData["extraData"] = json.dumps(dataJson)
+
+        if datatype == "raw":
+            return rawData
+        if datatype == "plaintext":
+            elements = []
+            for element in rawData["data"]:
+                elements.append(element["name"])
+            return {"datatype": "plaintext", "data": "\n".join(elements)}
+        if datatype == "wheelofnames":
+            elements = []
+            for element in rawData["data"]:
+                elements.append({"text": element["name"]})
+            finalData = {}
+            if "extraData" in rawData:
+                finalData = json.loads(rawData["extraData"])
+                finalData["entries"] = elements
+            else:
+                finalData = {"entries": elements}
+            return {"datatype": "wheelofnames", "data": json.dumps(finalData)}
+
     def checkFileSaved(self):
-        if self.getElements() == self.currentFileContent:
+        if (
+            self.getElements()["data"]
+            == self.convertData(self.currentFileContent, "raw")["data"]
+        ):
             self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
             self.header_bar.get_title_widget().set_title(f"{self.currentFileTitle}")
             self.currentFileIsSaved = True
@@ -286,13 +383,20 @@ class PickerWindow(Adw.ApplicationWindow):
             self.currentFileIsSaved = False
 
     def getElements(self):
-        elements = []
+        elements = {"datatype": "raw", "data": []}
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
-            elements.append(child.get_title().replace("&amp;", "&"))
+            elements["data"].append({"name": child.get_title().replace("&amp;", "&")})
             child = child.get_next_sibling()
 
-        return "\n".join(elements)
+        try:
+            if "extraData" in self.convertData(self.currentFileContent, "raw"):
+                elements["extraData"] = self.convertData(
+                    self.currentFileContent, "raw"
+                )["extraData"]
+        except:
+            pass
+        return elements
 
     def createAction(self, name, callback):
         action = Gio.SimpleAction.new(name, None)

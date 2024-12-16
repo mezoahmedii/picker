@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-08 13:48-0500\n"
+"POT-Creation-Date: 2024-12-15 21:18-0500\n"
 "PO-Revision-Date: 2024-10-23 11:25+0100\n"
 "Last-Translator: Albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <LL@li.org>\n"
@@ -16,90 +16,98 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.py:39 src/window.py:280 src/window.py:284
+#: src/main.py:43 src/window.py:377 src/window.py:381
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
 #: src/window.blp:31
 msgid "Picker"
 msgstr "Picker"
 
-#: src/window.py:14
+#: src/window.py:16
 msgid "Add something…"
 msgstr "Aggiungi qualcosa…"
 
-#: src/window.py:80
+#: src/window.py:92
 msgid "Okay"
 msgstr "Ok"
 
-#: src/window.py:84
+#: src/window.py:96
 msgid "Nothing to Choose"
 msgstr "Niente da scegliere"
 
-#: src/window.py:85
+#: src/window.py:97
 msgid "Please enter some things to be chosen from."
 msgstr "Inserisci alcune cose tra cui scegliere."
 
-#: src/window.py:89
+#: src/window.py:101
 msgid "has been chosen!"
 msgstr "è stato scelto!"
 
-#: src/window.py:90
+#: src/window.py:102
 msgid "Copy"
 msgstr "Copia"
 
-#: src/window.py:93
+#: src/window.py:104
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/window.py:104 src/window.py:118
-msgid "Text Files"
+#: src/window.py:116
+msgid "Supported Files"
 msgstr ""
 
-#: src/window.py:105 src/window.py:119
+#: src/window.py:118 src/window.py:142
 msgid "All Files"
 msgstr ""
 
-#: src/window.py:140
+#: src/window.py:134
+msgid "Wheel Of Names Wheels"
+msgstr ""
+
+#: src/window.py:139
+msgid "Text Files"
+msgstr ""
+
+#: src/window.py:167
 msgid "Removed item from the list"
 msgstr "Elemento rimosso dall'elenco"
 
-#: src/window.py:141
+#: src/window.py:168
 msgid "Undo"
 msgstr "Annulla"
 
-#: src/window.py:151
+#: src/window.py:179
 msgid "Copied item to clipboard"
 msgstr "Elemento copiato negli appunti"
 
-#: src/window.py:163
+#: src/window.py:192
 msgid "Unable to open file: "
 msgstr "Impossibile aprire il file:"
 
-#: src/window.py:169
+#: src/window.py:201
 msgid "Unable to open file: The file isn't encoded properly"
 msgstr "Impossibile aprire il file: il file non è codificato correttamente"
 
-#: src/window.py:233
+#: src/window.py:293
 msgid "Unable to save file"
 msgstr "Impossibile salvare il file"
 
-#: src/window.py:254
+#: src/window.py:314
 msgid "Save Changes?"
 msgstr "Salvare le modifiche?"
 
-#: src/window.py:255
+#: src/window.py:315
 msgid "Any unsaved changes will be lost."
 msgstr "Tutte le modifiche non salvate andranno perse."
 
-#: src/window.py:257
+#: src/window.py:317
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/window.py:258
+#: src/window.py:318
 msgid "Discard"
 msgstr "Scarta"
 
-#: src/window.py:261 src/window.blp:74
+#: src/window.py:320 src/window.blp:74
 msgid "Save"
 msgstr "Salva"
 
@@ -136,48 +144,52 @@ msgid "Showing chosen item"
 msgstr "Mostra elemento selezionato"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
-msgid "Added file chooser filter"
+msgid "Added importing and exporting to wheelofnames.com wheels"
 msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:57
-msgid "Fixed a bug with opening files"
+msgid "Added file chooser filter"
 msgstr ""
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:65
+msgid "Fixed a bug with opening files"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:73
 msgid "Added the ability to open and save files"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:66
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:74
 msgid "Added Occitan translaton"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:67
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:75
 msgid "Internal code changes"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:75
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:83
 msgid "Fixed a bug where something containing \"&amp;\" would not show up"
 msgstr ""
 "Risolto un bug per cui qualcosa contenente \"&\" non veniva visualizzato"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:76
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:84
 msgid "Updated app info and screenshots to fit guidelines"
 msgstr ""
 "Informazioni e screenshot dell'app aggiornati per adattarsi alle linee guida"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:77
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:85
 msgid "Added translation files"
 msgstr "Aggiunti file di traduzione"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:85
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:93
 msgid "Fixed a small bug in the symbolic icon"
 msgstr "Risolto un piccolo bug nell'icona simbolica"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:86
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:94
 msgid "Changed some stuff in the build process"
 msgstr "Cambiato alcune cose nel processo di compilazione"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:93
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:101
 msgid "The first version of the app."
 msgstr "La prima versione dell'app."
 
@@ -198,13 +210,21 @@ msgstr "_Scegliere"
 msgid "Save As..."
 msgstr "Salva con nome..."
 
+#: src/window.blp:85
+msgid "Save As Plain Text"
+msgstr ""
+
+#: src/window.blp:90
+msgid "Save As Wheel Of Names Wheel"
+msgstr ""
+
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:86
+#: src/window.blp:97
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:92
+#: src/window.blp:103
 msgid "_About Picker"
 msgstr "_Informazioni su Picker"
 
