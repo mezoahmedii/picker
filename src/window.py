@@ -49,7 +49,8 @@ class PickerWindow(Adw.ApplicationWindow):
         self.createAction("save-file", self.onSaveFile)
         self.createAction("save-file-as", self.onSaveFileAs)
         self.createAction("save-file-as-plaintext", self.onSaveFileAsPlaintext)
-        self.createAction("save-file-as-wheelofnames", self.onSaveFileAsWheelofnames)
+        self.createAction("save-file-as-wheelofnames",
+                          self.onSaveFileAsWheelofnames)
 
         self.entryRow.connect("apply", self.onEnterElement)
         self.elementsList.add(self.entryRow)
@@ -61,22 +62,13 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onEnterElement(self, widget):
         if bool(self.entryRow.get_text().strip()):
-            actionRow = Adw.ActionRow(
-                title=self.entryRow.get_text().strip().replace("&", "&amp;")
-            )
-
-            removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
-            removeButton.get_style_context().add_class("destructive-action")
-            removeButton.connect("clicked", self.removeElement, actionRow)
-
-            actionRow.add_suffix(removeButton)
-
-            self.elementsList.add(actionRow)
-            self.checkFileSaved()
+            self.createElement(self.entryRow.get_text().strip())
 
             self.entryRow.set_text("")
             self.entryRow.set_show_apply_button(False)
             self.entryRow.set_show_apply_button(True)
+
+            self.checkFileSaved()
 
     def onChooseElement(self, widget, __):
         elements = []
@@ -84,9 +76,7 @@ class PickerWindow(Adw.ApplicationWindow):
         while child is not None:
             elements.append(child)
             child = child.get_next_sibling()
-
         chosenElement = ""
-
         dialog = Adw.AlertDialog()
 
         dialog.add_response("dismiss", _("Okay"))
@@ -100,9 +90,11 @@ class PickerWindow(Adw.ApplicationWindow):
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body(_("has been chosen!"))
             dialog.add_response("copy", _("Copy"))
-            dialog.set_response_appearance("copy", Adw.ResponseAppearance.SUGGESTED)
+            dialog.set_response_appearance(
+                "copy", Adw.ResponseAppearance.SUGGESTED)
             dialog.add_response("remove", _("Remove"))
-            dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
+            dialog.set_response_appearance(
+                "remove", Adw.ResponseAppearance.DESTRUCTIVE)
 
         dialog.choose(self, None, self.onChosenDialogResponse, chosenElement)
 
@@ -113,7 +105,8 @@ class PickerWindow(Adw.ApplicationWindow):
     def onOpenFile(self, widget, __):
         filters = Gio.ListStore()
         filters.append(
-            Gtk.FileFilter(name=_("Supported Files"), suffixes=["txt", "json", "wheel"])
+            Gtk.FileFilter(name=_("Supported Files"),
+                           suffixes=["txt", "json", "wheel"])
         )
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
 
@@ -136,7 +129,8 @@ class PickerWindow(Adw.ApplicationWindow):
             )
             initname = "New File.wheel"
         else:
-            filters.append(Gtk.FileFilter(name=_("Text Files"), suffixes=["txt"]))
+            filters.append(Gtk.FileFilter(
+                name=_("Text Files"), suffixes=["txt"]))
             initname = "New File.txt"
 
         filters.append(Gtk.FileFilter(name=_("All Files"), patterns=["*"]))
@@ -158,6 +152,18 @@ class PickerWindow(Adw.ApplicationWindow):
             self.saveAlert()
             return True
 
+    def createElement(self, element):
+        actionRow = Adw.ActionRow(
+            title=element.replace("&", "&amp;")
+        )
+
+        removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
+        removeButton.get_style_context().add_class("destructive-action")
+        removeButton.connect("clicked", self.removeElement, actionRow)
+
+        actionRow.add_suffix(removeButton)
+        self.elementsList.add(actionRow)
+
     def removeElement(self, widget, element):
         self.latest_removed_item = element
         self.elementsList.remove(element)
@@ -176,7 +182,8 @@ class PickerWindow(Adw.ApplicationWindow):
         response = dialog.choose_finish(task)
         if response == "copy":
             Gdk.Display.get_default().get_clipboard().set(element.get_title())
-            self.toast_overlay.add_toast(Adw.Toast(title=_("Copied item to clipboard")))
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=_("Copied item to clipboard")))
         if response == "remove":
             self.removeElement(None, element)
 
@@ -216,7 +223,8 @@ class PickerWindow(Adw.ApplicationWindow):
             "standard::display-name", Gio.FileQueryInfoFlags.NONE
         )
         if info:
-            self.currentFileTitle = info.get_attribute_string("standard::display-name")
+            self.currentFileTitle = info.get_attribute_string(
+                "standard::display-name")
         else:
             self.currentFileTitle = self.loadedFile.get_basename()
 
@@ -228,7 +236,7 @@ class PickerWindow(Adw.ApplicationWindow):
                 self.currentFileType = "wheelofnames"
             else:
                 self.currentFileType = "plaintext"
-        except:
+        except Exception:
             self.currentFileType = "plaintext"
 
         self.currentFileContent = {
@@ -248,15 +256,7 @@ class PickerWindow(Adw.ApplicationWindow):
             },
             "raw",
         )["data"]:
-            actionRow = Adw.ActionRow(title=element["name"].replace("&", "&amp;"))
-
-            removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
-            removeButton.get_style_context().add_class("destructive-action")
-            removeButton.connect("clicked", self.removeElement, actionRow)
-
-            actionRow.add_suffix(removeButton)
-
-            self.elementsList.add(actionRow)
+            self.createElement(element)
 
         self.checkFileSaved()
 
@@ -290,12 +290,15 @@ class PickerWindow(Adw.ApplicationWindow):
     def saveFileComplete(self, file, result):
         res = file.replace_contents_finish(result)
         if not res:
-            self.toast_overlay.add_toast(Adw.Toast(title=_("Unable to save file")))
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=_("Unable to save file")))
             return
 
-        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        info = file.query_info("standard::display-name",
+                               Gio.FileQueryInfoFlags.NONE)
         if info:
-            self.currentFileTitle = info.get_attribute_string("standard::display-name")
+            self.currentFileTitle = info.get_attribute_string(
+                "standard::display-name")
         else:
             self.currentFileTitle = file.get_basename()
 
@@ -316,9 +319,11 @@ class PickerWindow(Adw.ApplicationWindow):
 
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("discard", _("Discard"))
-        dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.set_response_appearance(
+            "discard", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.add_response("save", _("Save"))
-        dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_response_appearance(
+            "save", Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response("save")
 
         dialog.choose(self, None, self.onSaveAlertResponse)
@@ -375,18 +380,21 @@ class PickerWindow(Adw.ApplicationWindow):
             == self.convertData(self.currentFileContent, "raw")["data"]
         ):
             self.set_title(f"{self.currentFileTitle} - " + _("Picker"))
-            self.header_bar.get_title_widget().set_title(f"{self.currentFileTitle}")
+            self.header_bar.get_title_widget().set_title(
+                f"{self.currentFileTitle}")
             self.currentFileIsSaved = True
         else:
             self.set_title(f"• {self.currentFileTitle} - " + _("Picker"))
-            self.header_bar.get_title_widget().set_title(f"• {self.currentFileTitle}")
+            self.header_bar.get_title_widget().set_title(
+                f"• {self.currentFileTitle}")
             self.currentFileIsSaved = False
 
     def getElements(self):
         elements = {"datatype": "raw", "data": []}
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
-            elements["data"].append({"name": child.get_title().replace("&amp;", "&")})
+            elements["data"].append(
+                {"name": child.get_title().replace("&amp;", "&")})
             child = child.get_next_sibling()
 
         try:
@@ -394,7 +402,7 @@ class PickerWindow(Adw.ApplicationWindow):
                 elements["extraData"] = self.convertData(
                     self.currentFileContent, "raw"
                 )["extraData"]
-        except:
+        except Exception:
             pass
         return elements
 

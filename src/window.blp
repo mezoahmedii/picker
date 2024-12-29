@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $PickerWindow : Adw.ApplicationWindow {
+template $PickerWindow: Adw.ApplicationWindow {
   title: _("Picker");
   default-width: 600;
   default-height: 750;
@@ -42,7 +42,7 @@ template $PickerWindow : Adw.ApplicationWindow {
             Adw.PreferencesGroup elementsList {}
 
             Box {
-            halign: center;
+              halign: center;
 
               Button {
                 action-name: "win.choose-element";
@@ -80,6 +80,7 @@ menu primary_menu {
       action: "win.save-file-as";
     }
   }
+
   section {
     item {
       label: _("Save As Plain Text");
@@ -91,6 +92,7 @@ menu primary_menu {
       action: "win.save-file-as-wheelofnames";
     }
   }
+
   section {
     item {
       // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
