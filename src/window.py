@@ -12,6 +12,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
     toast_overlay = Gtk.Template.Child()
     header_bar = Gtk.Template.Child()
+    statusPage = Gtk.Template.Child()
     elementsList = Gtk.Template.Child()
     entryRow = Adw.EntryRow(title=_("Add something…"), show_apply_button=True)
 
@@ -42,6 +43,7 @@ class PickerWindow(Adw.ApplicationWindow):
         self.settings.bind(
             "is-fullscreen", self, "fullscreened", Gio.SettingsBindFlags.DEFAULT
         )
+        self.changeLogoVisibility(not self.settings.get_boolean("hide-logo"))
 
         self.createAction("choose-element", self.onChooseElement)
         self.createAction("restore-element", self.onRestoreElement)
@@ -177,6 +179,17 @@ class PickerWindow(Adw.ApplicationWindow):
         )
 
         self.checkFileSaved()
+
+    def changeLogoVisibility(self, visibility):
+        if visibility:
+            self.statusPage.set_title(_("Picker"))
+            self.statusPage.set_description(_("Randomly pick something to do"))
+            self.statusPage.set_icon_name(
+                "io.github.mezoahmedii.Picker-symbolic")
+        else:
+            self.statusPage.set_title("")
+            self.statusPage.set_description("")
+            self.statusPage.set_icon_name("")
 
     def onChosenDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)

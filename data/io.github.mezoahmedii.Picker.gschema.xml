@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="picker">
-	<schema id="io.github.mezoahmedii.Picker" path="/io/github/mezoahmedii/Picker/">
-	  <key name="width" type="i">
+  <schema id="io.github.mezoahmedii.Picker" path="/io/github/mezoahmedii/Picker/">
+    <key name="width" type="i">
       <default>640</default>
     </key>
     <key name="height" type="i">
@@ -13,5 +13,8 @@
     <key name="is-fullscreen" type="b">
       <default>false</default>
     </key>
-	</schema>
+    <key name="hide-logo" type="b">
+      <default>false</default>
+    </key>
+  </schema>
 </schemalist>
