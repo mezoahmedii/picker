@@ -92,9 +92,15 @@ class PickerWindow(Adw.ApplicationWindow):
             chosenElement = choice(elements)
             dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
             dialog.set_body(_("has been chosen!"))
+
             dialog.add_response("copy", _("Copy"))
             dialog.set_response_appearance(
                 "copy", Adw.ResponseAppearance.SUGGESTED)
+
+            dialog.add_response("hide", _("Hide"))
+            dialog.set_response_appearance(
+                "hide", Adw.ResponseAppearance.SUGGESTED)
+
             dialog.add_response("remove", _("Remove"))
             dialog.set_response_appearance(
                 "remove", Adw.ResponseAppearance.DESTRUCTIVE)
@@ -193,7 +199,9 @@ class PickerWindow(Adw.ApplicationWindow):
         self.checkFileSaved()
 
     def toggleElementHidden(self, widget, element):
-        if element.get_first_child().get_last_child().get_first_child().get_icon_name() == "hidden-symbolic":
+        if not widget:
+            widget = element.get_first_child().get_last_child().get_first_child()
+        if widget.get_icon_name() == "hidden-symbolic":
             widget.set_icon_name("not-hidden-symbolic")
             widget.get_style_context().add_class("suggested-action")
         else:
@@ -219,6 +227,8 @@ class PickerWindow(Adw.ApplicationWindow):
             Gdk.Display.get_default().get_clipboard().set(element.get_title())
             self.toast_overlay.add_toast(
                 Adw.Toast(title=_("Copied item to clipboard")))
+        if response == "hide":
+            self.toggleElementHidden(None, element)
         if response == "remove":
             self.removeElement(None, element)
 
