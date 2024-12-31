@@ -64,7 +64,10 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onEnterElement(self, widget):
         if bool(self.entryRow.get_text().strip()):
-            self.createElement(self.entryRow.get_text().strip())
+            if self.entryRow.get_text().strip().startswith("(Hidden) "):
+                self.createElement(self.entryRow.get_text().strip()[9:], True)
+            else:
+                self.createElement(self.entryRow.get_text().strip())
 
             self.entryRow.set_text("")
             self.entryRow.set_show_apply_button(False)
@@ -301,7 +304,7 @@ class PickerWindow(Adw.ApplicationWindow):
             },
             "raw",
         )["data"]:
-            self.createElement(element["name"])
+            self.createElement(element["name"], element["hidden"])
 
         self.checkFileSaved()
 
@@ -393,11 +396,20 @@ class PickerWindow(Adw.ApplicationWindow):
             rawData = data
         if originalType == "plaintext":
             for element in data["data"].splitlines():
-                rawData["data"].append({"name": element})
+                if element.startswith("(Hidden) "):
+                    rawData["data"].append(
+                        {"name": element[9:], "hidden": True})
+                else:
+                    rawData["data"].append({"name": element, "hidden": False})
         if originalType == "wheelofnames":
             dataJson = json.loads(data["data"])
             for element in dataJson["entries"]:
-                rawData["data"].append({"name": element["text"]})
+                try:
+                    rawData["data"].append(
+                        {"name": element["text"], "hidden": element["pickerHidden"]})
+                except KeyError:
+                    rawData["data"].append(
+                        {"name": element["text"], "hidden": False})
             rawData["extraData"] = json.dumps(dataJson)
 
         if datatype == "raw":
@@ -405,12 +417,14 @@ class PickerWindow(Adw.ApplicationWindow):
         if datatype == "plaintext":
             elements = []
             for element in rawData["data"]:
-                elements.append(element["name"])
+                elements.append(
+                    ("(Hidden) " if element["hidden"] else "") + element["name"])
             return {"datatype": "plaintext", "data": "\n".join(elements)}
         if datatype == "wheelofnames":
             elements = []
             for element in rawData["data"]:
-                elements.append({"text": element["name"]})
+                elements.append(
+                    {"text": element["name"], "pickerHidden": element["hidden"]})
             finalData = {}
             if "extraData" in rawData:
                 finalData = json.loads(rawData["extraData"])
