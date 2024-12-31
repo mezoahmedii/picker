@@ -1,7 +1,7 @@
 # Copyright 2024 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from random import choice
+from random import choice, randint
 import json
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
@@ -76,7 +76,8 @@ class PickerWindow(Adw.ApplicationWindow):
         elements = []
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
-            elements.append(child)
+            if child.get_first_child().get_last_child().get_first_child().get_icon_name() == "not-hidden-symbolic":
+                elements.append(child)
             child = child.get_next_sibling()
         chosenElement = ""
         dialog = Adw.AlertDialog()
@@ -154,16 +155,27 @@ class PickerWindow(Adw.ApplicationWindow):
             self.saveAlert()
             return True
 
-    def createElement(self, element):
+    def createElement(self, element, hidden=False):
         actionRow = Adw.ActionRow(
             title=element.replace("&", "&amp;")
         )
+
+        if hidden:
+            hideButton = Gtk.Button(
+                icon_name="hidden-symbolic", valign="center")
+        else:
+            hideButton = Gtk.Button(
+                icon_name="not-hidden-symbolic", valign="center")
+            hideButton.get_style_context().add_class("suggested-action")
+        hideButton.connect("clicked", self.toggleElementHidden, actionRow)
+        actionRow.add_suffix(hideButton)
 
         removeButton = Gtk.Button(icon_name="remove-symbolic", valign="center")
         removeButton.get_style_context().add_class("destructive-action")
         removeButton.connect("clicked", self.removeElement, actionRow)
 
         actionRow.add_suffix(removeButton)
+
         self.elementsList.add(actionRow)
 
     def removeElement(self, widget, element):
@@ -177,6 +189,16 @@ class PickerWindow(Adw.ApplicationWindow):
                 action_name="win.restore-element",
             )
         )
+
+        self.checkFileSaved()
+
+    def toggleElementHidden(self, widget, element):
+        if element.get_first_child().get_last_child().get_first_child().get_icon_name() == "hidden-symbolic":
+            widget.set_icon_name("not-hidden-symbolic")
+            widget.get_style_context().add_class("suggested-action")
+        else:
+            widget.set_icon_name("hidden-symbolic")
+            widget.get_style_context().remove_class("suggested-action")
 
         self.checkFileSaved()
 
@@ -269,7 +291,7 @@ class PickerWindow(Adw.ApplicationWindow):
             },
             "raw",
         )["data"]:
-            self.createElement(element)
+            self.createElement(element["name"])
 
         self.checkFileSaved()
 
@@ -407,7 +429,11 @@ class PickerWindow(Adw.ApplicationWindow):
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
         while child is not None:
             elements["data"].append(
-                {"name": child.get_title().replace("&amp;", "&")})
+                {
+                    "name": child.get_title().replace("&amp;", "&"),
+                    "hidden": child.get_first_child().get_last_child(
+                    ).get_first_child().get_icon_name() == "hidden-symbolic"
+                })
             child = child.get_next_sibling()
 
         try:
