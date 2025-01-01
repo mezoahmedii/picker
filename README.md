@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/fb01663b-f638-460b-b819-0411dce08cc4" />
+  <img src="https://github.com/mezoahmedii/picker/blob/main/data/icons/hicolor/scalable/apps/io.github.mezoahmedii.Picker.svg" />
 
   # Picker
   Randomly pick something to do

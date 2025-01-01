@@ -18,7 +18,10 @@ class PickerApplication(Adw.Application):
             flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
         )
 
-        self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
+        self.create_action(
+            "quit", lambda *_: self.props.active_window.close(), ["<primary>q"])
+        self.create_action(
+            "preferences", self.on_preferences_action, ["<Ctrl>comma"])
         self.create_action("about", self.on_about_action)
 
         self.set_accels_for_action("win.choose-element", ["<primary>Return"])
@@ -45,12 +48,31 @@ class PickerApplication(Adw.Application):
             developer_name="MezoAhmedII",
             website="https://github.com/mezoahmedii/picker",
             issue_url="https://github.com/mezoahmedii/picker/issues",
-            version="1.2.0",
+            version="1.3.0",
             developers=["MezoAhmedII"],
             copyright="© 2024 MezoAhmedII",
             license_type=Gtk.License.GPL_3_0,
         )
         about.present(parent=self.props.active_window)
+
+    def on_preferences_action(self, widget, __):
+        hideLogoPreference = Adw.SwitchRow(title=_("Hide App Logo"))
+        Gio.Settings(schema_id="io.github.mezoahmedii.Picker").bind(
+            "hide-logo", hideLogoPreference, "active", Gio.SettingsBindFlags.DEFAULT)
+        hideLogoPreference.connect("notify::active", lambda widget,
+                                   __: self.props.active_window.changeLogoVisibility(not widget.get_active()))
+
+        generalPreferences = Adw.PreferencesGroup(title="General")
+        generalPreferences.add(hideLogoPreference)
+
+        preferencesPage = Adw.PreferencesPage()
+        preferencesPage.add(generalPreferences)
+
+        dialogContent = Adw.ToolbarView(content=preferencesPage)
+        dialogContent.add_top_bar(Adw.HeaderBar())
+
+        dialog = Adw.PreferencesDialog(child=dialogContent)
+        dialog.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.

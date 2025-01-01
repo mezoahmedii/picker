@@ -17,6 +17,8 @@ action_icons = [
     # each icon must be registered here
     join_paths(action_dir, 'remove-symbolic.svg'),
     join_paths(action_dir, 'choose-symbolic.svg'),
+    join_paths(action_dir, 'hidden-symbolic.svg'),
+    join_paths(action_dir, 'not-hidden-symbolic.svg'),
 ]
 install_data(
   action_icons,
