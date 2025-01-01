@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-15 21:18-0500\n"
+"POT-Creation-Date: 2024-12-31 20:46-0500\n"
 "PO-Revision-Date: 2024-11-08 21:48+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -18,105 +18,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: src/main.py:43 src/window.py:377 src/window.py:381
+#: src/main.py:46 src/window.py:218 src/window.py:441 src/window.py:446
 #: data/io.github.mezoahmedii.Picker.desktop.in:7
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:5 src/window.blp:5
 #: src/window.blp:31
 msgid "Picker"
 msgstr "Keuzemaker"
 
-#: src/window.py:16
+#: src/main.py:59
+msgid "Hide App Logo"
+msgstr ""
+
+#: src/window.py:17
 msgid "Add something…"
 msgstr "Voeg iets toe…"
 
-#: src/window.py:92
+#: src/window.py:88
 msgid "Okay"
 msgstr "Oké"
 
-#: src/window.py:96
+#: src/window.py:92
 msgid "Nothing to Choose"
 msgstr "Er valt niks te kiezen"
 
-#: src/window.py:97
+#: src/window.py:93
 msgid "Please enter some things to be chosen from."
 msgstr "Voer items toe om uit te kiezen."
 
-#: src/window.py:101
+#: src/window.py:97
 msgid "has been chosen!"
 msgstr "is gekozen!"
 
-#: src/window.py:102
+#: src/window.py:99
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/window.py:104
+#: src/window.py:103
+msgid "Hide"
+msgstr ""
+
+#: src/window.py:107
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/window.py:116
+#: src/window.py:120
 msgid "Supported Files"
 msgstr ""
 
-#: src/window.py:118 src/window.py:142
+#: src/window.py:123 src/window.py:148
 msgid "All Files"
 msgstr ""
 
-#: src/window.py:134
+#: src/window.py:139
 msgid "Wheel Of Names Wheels"
 msgstr ""
 
-#: src/window.py:139
+#: src/window.py:145
 msgid "Text Files"
 msgstr ""
 
-#: src/window.py:167
+#: src/window.py:196
 msgid "Removed item from the list"
 msgstr "Het item is van de lijst verwijderd"
 
-#: src/window.py:168
+#: src/window.py:197
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/window.py:179
-msgid "Copied item to clipboard"
-msgstr "Het item is gekopieerd naar het klembord"
-
-#: src/window.py:192
-msgid "Unable to open file: "
-msgstr "Het bestand kan niet worden geopend: "
-
-#: src/window.py:201
-msgid "Unable to open file: The file isn't encoded properly"
-msgstr "Het bestand kan niet worden geopend: onjuiste encodering"
-
-#: src/window.py:293
-msgid "Unable to save file"
-msgstr "Het bestand kan niet worden opgeslagen"
-
-#: src/window.py:314
-msgid "Save Changes?"
-msgstr "Wil je de wĳzigingen opslaan?"
-
-#: src/window.py:315
-msgid "Any unsaved changes will be lost."
-msgstr "Alle niet-opgeslagen wijzigingen worden gewist."
-
-#: src/window.py:317
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: src/window.py:318
-msgid "Discard"
-msgstr "Wissen"
-
-#: src/window.py:320 src/window.blp:74
-msgid "Save"
-msgstr "Opslaan"
-
-#: data/io.github.mezoahmedii.Picker.desktop.in:8
+#: src/window.py:219 data/io.github.mezoahmedii.Picker.desktop.in:8
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:6 src/window.blp:32
 msgid "Randomly pick something to do"
 msgstr "Kies een willekeurig iets om te doen"
+
+#: src/window.py:232
+msgid "Copied item to clipboard"
+msgstr "Het item is gekopieerd naar het klembord"
+
+#: src/window.py:247
+msgid "Unable to open file: "
+msgstr "Het bestand kan niet worden geopend: "
+
+#: src/window.py:256
+msgid "Unable to open file: The file isn't encoded properly"
+msgstr "Het bestand kan niet worden geopend: onjuiste encodering"
+
+#: src/window.py:342
+msgid "Unable to save file"
+msgstr "Het bestand kan niet worden opgeslagen"
+
+#: src/window.py:365
+msgid "Save Changes?"
+msgstr "Wil je de wĳzigingen opslaan?"
+
+#: src/window.py:366
+msgid "Any unsaved changes will be lost."
+msgstr "Alle niet-opgeslagen wijzigingen worden gewist."
+
+#: src/window.py:368
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/window.py:369
+msgid "Discard"
+msgstr "Wissen"
+
+#: src/window.py:372
+msgid "Save"
+msgstr "Opslaan"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.mezoahmedii.Picker.desktop.in:12
@@ -137,59 +145,71 @@ msgstr ""
 "bijvoorbeeld niet weet wat je wilt eten, voer dan je favoriete maaltijden in "
 "en laat Keuzemaker al het werk doen."
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:27
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:29
 msgid "Adding items to the list"
 msgstr "Toevoegen van items aan de lijst"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:31
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:34
 msgid "Showing chosen item"
 msgstr "Tonen van een gekozen item"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:49
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:52
+msgid "Added preferences screen"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:53
+msgid "Added option to hide the app logo in the center of the app"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:54
+msgid "Added hiding items which will prevent them from being chosen"
+msgstr ""
+
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:62
 msgid "Added importing and exporting to wheelofnames.com wheels"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:57
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:70
 msgid "Added file chooser filter"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:65
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:78
 msgid "Fixed a bug with opening files"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:73
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:86
 msgid "Added the ability to open and save files"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:74
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:87
 msgid "Added Occitan translaton"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:75
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:88
 msgid "Internal code changes"
 msgstr ""
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:83
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:96
 msgid "Fixed a bug where something containing \"&amp;\" would not show up"
 msgstr "Opgelost: bug waardoor items met “&amp;” niet werden getoond"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:84
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:97
 msgid "Updated app info and screenshots to fit guidelines"
 msgstr "Bijgewerkt: toepassingsinformatie en schermfoto's"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:85
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:98
 msgid "Added translation files"
 msgstr "Nieuw: vertalingen"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:93
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:106
 msgid "Fixed a small bug in the symbolic icon"
 msgstr "Opgelost: kleine bug in symbolisch pictogram"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:94
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:107
 msgid "Changed some stuff in the build process"
 msgstr "Gewijzigd: enkele dingen in het compilatieproces"
 
-#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:101
+#: data/io.github.mezoahmedii.Picker.metainfo.xml.in:114
 msgid "The first version of the app."
 msgstr "De allereerste versie."
 
@@ -206,27 +226,46 @@ msgstr "Menu"
 msgid "_Choose"
 msgstr "_Kiezen"
 
-#: src/window.blp:79
-msgid "Save As..."
-msgstr "Opslaan als…"
-
-#: src/window.blp:85
-msgid "Save As Plain Text"
-msgstr ""
-
-#: src/window.blp:90
-msgid "Save As Wheel Of Names Wheel"
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:75
+msgid "_Save"
 msgstr ""
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:97
+#: src/window.blp:81
+msgid "Save _As..."
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:89
+msgid "Save As _Plain Text File"
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:95
+msgid "Save As _Wheel Of Names Wheel"
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:103
+msgid "P_references"
+msgstr ""
+
+#. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+#: src/window.blp:109
 msgid "_Keyboard Shortcuts"
 msgstr "_Sneltoetsen"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-#: src/window.blp:103
-msgid "_About Picker"
-msgstr "_Over Keuzemaker"
+#: src/window.blp:115
+msgid "A_bout Picker"
+msgstr ""
+
+#~ msgid "Save As..."
+#~ msgstr "Opslaan als…"
+
+#~ msgid "_About Picker"
+#~ msgstr "_Over Keuzemaker"
 
 #~ msgid "Randomly pick somthing to do"
 #~ msgstr "Kies een willekeurig iets om te doen"
