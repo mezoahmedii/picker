@@ -71,31 +71,36 @@ template $PickerWindow: Adw.ApplicationWindow {
 menu primary_menu {
   section {
     item {
-      label: _("Save");
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("_Save");
       action: "win.save-file";
     }
 
     item {
-      label: _("Save As...");
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("Save _As…");
       action: "win.save-file-as";
     }
   }
 
   section {
     item {
-      label: _("Save As Plain Text");
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("Save As _Plain Text File");
       action: "win.save-file-as-plaintext";
     }
 
     item {
-      label: _("Save As Wheel Of Names Wheel");
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("Save As _Wheel Of Names Wheel");
       action: "win.save-file-as-wheelofnames";
     }
   }
 
   section {
     item {
-      label: _("Preferences");
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("P_references");
       action: "app.preferences";
     }
 
@@ -107,7 +112,7 @@ menu primary_menu {
 
     item {
       // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
-      label: _("_About Picker");
+      label: _("A_bout Picker");
       action: "app.about";
     }
   }
