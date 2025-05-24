@@ -48,7 +48,7 @@ class PickerApplication(Adw.Application):
             developer_name="MezoAhmedII",
             website="https://github.com/mezoahmedii/picker",
             issue_url="https://github.com/mezoahmedii/picker/issues",
-            version="1.3.0",
+            version="1.3.1",
             developers=["MezoAhmedII"],
             copyright="© 2024 MezoAhmedII",
             license_type=Gtk.License.GPL_3_0,
