@@ -1,4 +1,4 @@
-# Copyright 2024 MezoAhmedII
+# Copyright 2025 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice, randint
@@ -77,11 +77,10 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def onChooseElement(self, widget, __):
         elements = []
-        child = self.entryRow.get_parent().get_first_child().get_next_sibling()
-        while child is not None:
-            if child.get_first_child().get_last_child().get_first_child().get_icon_name() == "not-hidden-symbolic":
-                elements.append(child)
-            child = child.get_next_sibling()
+        for element in self.getElements()["data"]:
+            if not element["hidden"]:
+                elements.append(element)
+
         chosenElement = ""
         dialog = Adw.AlertDialog()
 
@@ -93,7 +92,7 @@ class PickerWindow(Adw.ApplicationWindow):
             dialog.set_body(_("Please enter some things to be chosen from."))
         else:
             chosenElement = choice(elements)
-            dialog.set_heading(chosenElement.get_title().replace("&amp;", "&"))
+            dialog.set_heading(chosenElement["name"])
             dialog.set_body(_("has been chosen!"))
 
             dialog.add_response("copy", _("Copy"))
@@ -108,10 +107,11 @@ class PickerWindow(Adw.ApplicationWindow):
             dialog.set_response_appearance(
                 "remove", Adw.ResponseAppearance.DESTRUCTIVE)
 
-        dialog.choose(self, None, self.onChosenDialogResponse, chosenElement)
+        dialog.choose(self, None, self.onChosenDialogResponse,
+                      chosenElement)
 
     def onRestoreElement(self, widget, __):
-        self.elementsList.add(self.latest_removed_item)
+        self.createElement(self.latest_removed_item)
         self.checkFileSaved()
 
     def onOpenFile(self, widget, __):
@@ -188,8 +188,14 @@ class PickerWindow(Adw.ApplicationWindow):
         self.elementsList.add(actionRow)
 
     def removeElement(self, widget, element):
-        self.latest_removed_item = element
-        self.elementsList.remove(element)
+        currentElement = self.entryRow.get_parent().get_first_child().get_next_sibling()
+        currentElementId = 0
+        while currentElementId < element["id"]:
+            currentElement = currentElement.get_next_sibling()
+            currentElementId += 1
+
+        self.latest_removed_item = element["name"]
+        self.elementsList.remove(currentElement)
 
         self.toast_overlay.add_toast(
             Adw.Toast(
@@ -203,7 +209,14 @@ class PickerWindow(Adw.ApplicationWindow):
 
     def toggleElementHidden(self, widget, element):
         if not widget:
-            widget = element.get_first_child().get_last_child().get_first_child()
+
+            currentElement = self.entryRow.get_parent().get_first_child().get_next_sibling()
+            currentElementId = 0
+            while currentElementId < element["id"]:
+                currentElement = currentElement.get_next_sibling()
+                currentElementId += 1
+
+            widget = currentElement.get_first_child().get_last_child().get_first_child()
         if widget.get_icon_name() == "hidden-symbolic":
             widget.set_icon_name("not-hidden-symbolic")
             widget.get_style_context().add_class("suggested-action")
@@ -227,7 +240,7 @@ class PickerWindow(Adw.ApplicationWindow):
     def onChosenDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
         if response == "copy":
-            Gdk.Display.get_default().get_clipboard().set(element.get_title())
+            Gdk.Display.get_default().get_clipboard().set(element["name"])
             self.toast_overlay.add_toast(
                 Adw.Toast(title=_("Copied item to clipboard")))
         if response == "hide":
@@ -395,21 +408,26 @@ class PickerWindow(Adw.ApplicationWindow):
         if originalType == "raw":
             rawData = data
         if originalType == "plaintext":
+            elementId = 0
             for element in data["data"].splitlines():
                 if element.startswith("(Hidden) "):
                     rawData["data"].append(
-                        {"name": element[9:], "hidden": True})
+                        {"id": elementId, "name": element[9:], "hidden": True})
                 else:
-                    rawData["data"].append({"name": element, "hidden": False})
+                    rawData["data"].append(
+                        {"id": elementId, "name": element, "hidden": False})
+                elementId += 1
         if originalType == "wheelofnames":
+            elementId = 0
             dataJson = json.loads(data["data"])
             for element in dataJson["entries"]:
                 try:
                     rawData["data"].append(
-                        {"name": element["text"], "hidden": element["pickerHidden"]})
+                        {"id": elementId, "name": element["text"], "hidden": element["pickerHidden"]})
                 except KeyError:
                     rawData["data"].append(
-                        {"name": element["text"], "hidden": False})
+                        {"id": elementId, "name": element["text"], "hidden": False})
+                elementId += 1
             rawData["extraData"] = json.dumps(dataJson)
 
         if datatype == "raw":
@@ -451,13 +469,16 @@ class PickerWindow(Adw.ApplicationWindow):
     def getElements(self):
         elements = {"datatype": "raw", "data": []}
         child = self.entryRow.get_parent().get_first_child().get_next_sibling()
+        elementId = 0
         while child is not None:
             elements["data"].append(
                 {
+                    "id": elementId,
                     "name": child.get_title().replace("&amp;", "&"),
                     "hidden": child.get_first_child().get_last_child(
                     ).get_first_child().get_icon_name() == "hidden-symbolic"
                 })
+            elementId += 1
             child = child.get_next_sibling()
 
         try:

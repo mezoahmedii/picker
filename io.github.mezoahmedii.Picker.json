@@ -1,7 +1,7 @@
 {
   "id": "io.github.mezoahmedii.Picker",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "47",
+  "runtime-version": "48",
   "sdk": "org.gnome.Sdk",
   "command": "picker",
   "finish-args": [
@@ -25,12 +25,14 @@
     {
       "name": "blueprint-compiler",
       "buildsystem": "meson",
-      "cleanup": ["*"],
+      "cleanup": [
+        "*"
+      ],
       "sources": [
         {
           "type": "git",
           "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
-          "tag": "v0.14.0"
+          "tag": "v0.16.0"
         }
       ]
     },
