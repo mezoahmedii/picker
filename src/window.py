@@ -188,13 +188,19 @@ class PickerWindow(Adw.ApplicationWindow):
         self.elementsList.add(actionRow)
 
     def removeElement(self, widget, element):
-        currentElement = self.entryRow.get_parent().get_first_child().get_next_sibling()
-        currentElementId = 0
-        while currentElementId < element["id"]:
-            currentElement = currentElement.get_next_sibling()
-            currentElementId += 1
+        print(type(element))
+        if isinstance(element, dict):
+            currentElement = self.entryRow.get_parent().get_first_child().get_next_sibling()
+            currentElementId = 0
+            while currentElementId < element["id"]:
+                currentElement = currentElement.get_next_sibling()
+                currentElementId += 1
 
-        self.latest_removed_item = element["name"]
+            self.latest_removed_item = element["name"]
+        else:
+            currentElement = element
+            self.latest_removed_item = element.get_title()
+
         self.elementsList.remove(currentElement)
 
         self.toast_overlay.add_toast(
