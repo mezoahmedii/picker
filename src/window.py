@@ -1,4 +1,4 @@
-# Copyright 2024 MezoAhmedII
+# Copyright 2025 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from random import choice, randint
