@@ -1,7 +1,7 @@
 # Copyright 2025 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from random import choice, randint
+from random import choice
 import json
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
