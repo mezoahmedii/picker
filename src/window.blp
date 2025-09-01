@@ -57,7 +57,7 @@ template $PickerWindow: Adw.ApplicationWindow {
 
                 styles [
                   "pill",
-                  "suggested-action"
+                  "suggested-action",
                 ]
               }
             }
@@ -69,6 +69,14 @@ template $PickerWindow: Adw.ApplicationWindow {
 }
 
 menu primary_menu {
+  section {
+    item {
+      // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
+      label: _("_New File");
+      action: "win.new-file";
+    }
+  }
+
   section {
     item {
       // Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
