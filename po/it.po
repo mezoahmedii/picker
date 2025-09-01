@@ -1,14 +1,14 @@
 # ITALIAN TRANSLATION.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# ALBANO BATTISTELLA <ALBANOBATTISTELLA@GMAIL.COM>, 2024.
+# ALBANO BATTISTELLA <ALBANOBATTISTELLA@GMAIL.COM>, 2024,2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-31 20:46-0500\n"
-"PO-Revision-Date: 2024-10-23 11:25+0100\n"
+"PO-Revision-Date: 2025-08-30 22:25+0100\n"
 "Last-Translator: Albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -25,7 +25,7 @@ msgstr "Picker"
 
 #: src/main.py:59
 msgid "Hide App Logo"
-msgstr ""
+msgstr "Nascondi Logo App"
 
 #: src/window.py:17
 msgid "Add something…"
@@ -53,7 +53,7 @@ msgstr "Copia"
 
 #: src/window.py:103
 msgid "Hide"
-msgstr ""
+msgstr "Nascondi"
 
 #: src/window.py:107
 msgid "Remove"
@@ -61,11 +61,11 @@ msgstr "Rimuovi"
 
 #: src/window.py:120
 msgid "Supported Files"
-msgstr ""
+msgstr "File supportati"
 
 #: src/window.py:123 src/window.py:148
 msgid "All Files"
-msgstr ""
+msgstr "Tutti i file"
 
 #: src/window.py:139
 msgid "Wheel Of Names Wheels"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: src/window.py:145
 msgid "Text Files"
-msgstr ""
+msgstr "File di testo"
 
 #: src/window.py:196
 msgid "Removed item from the list"
@@ -153,39 +153,39 @@ msgstr "Mostra elemento selezionato"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:52
 msgid "Added preferences screen"
-msgstr ""
+msgstr ""Aggiunta schermata delle preferenze"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:53
 msgid "Added option to hide the app logo in the center of the app"
-msgstr ""
+msgstr "Aggiunta l'opzione per nascondere il logo dell'app al centro dell'app"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:54
 msgid "Added hiding items which will prevent them from being chosen"
-msgstr ""
+msgstr "Aggiunti oggetti nascosti che impediranno che vengano scelti"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:62
 msgid "Added importing and exporting to wheelofnames.com wheels"
-msgstr ""
+msgstr "Aggiunta l'importazione e l'esportazione delle ruote su wheelofnames.com"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:70
 msgid "Added file chooser filter"
-msgstr ""
+msgstr "Aggiunto filtro di selezione file"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:78
 msgid "Fixed a bug with opening files"
-msgstr ""
+msgstr "Risolto un bug con l'apertura dei file"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:86
 msgid "Added the ability to open and save files"
-msgstr ""
+msgstr "Aggiunta la possibilità di aprire e salvare i file"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:87
 msgid "Added Occitan translaton"
-msgstr ""
+msgstr "Aggiunta traduzione occitana"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:88
 msgid "Internal code changes"
-msgstr ""
+msgstr "Modifiche al codice interno"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:96
 msgid "Fixed a bug where something containing \"&amp;\" would not show up"
@@ -229,27 +229,27 @@ msgstr "_Scegliere"
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:75
 msgid "_Save"
-msgstr ""
+msgstr "_Salva"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:81
 msgid "Save _As..."
-msgstr ""
+msgstr "Salva Come..."
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:89
 msgid "Save As _Plain Text File"
-msgstr ""
+msgstr "Salva Come _File di testo normale"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:95
 msgid "Save As _Wheel Of Names Wheel"
-msgstr ""
+msgstr "Salva Come _Wheel Of Names Wheel"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:103
 msgid "P_references"
-msgstr ""
+msgstr "P_referenze"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:109
@@ -259,7 +259,7 @@ msgstr "_Scorciatoie da tastiera"
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:115
 msgid "A_bout Picker"
-msgstr ""
+msgstr "I_nformazioni su Picker"
 
 #~ msgid "Save As..."
 #~ msgstr "Salva con nome..."
