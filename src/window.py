@@ -1,7 +1,7 @@
 # Copyright 2025 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from random import choice, randint
+from random import choice
 import json
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
@@ -47,6 +47,7 @@ class PickerWindow(Adw.ApplicationWindow):
 
         self.createAction("choose-element", self.onChooseElement)
         self.createAction("restore-element", self.onRestoreElement)
+        self.createAction("new-file", self.onNewFile)
         self.createAction("open-file", self.onOpenFile)
         self.createAction("save-file", self.onSaveFile)
         self.createAction("save-file-as", self.onSaveFileAs)
@@ -113,6 +114,13 @@ class PickerWindow(Adw.ApplicationWindow):
     def onRestoreElement(self, widget, __):
         self.createElement(self.latest_removed_item)
         self.checkFileSaved()
+
+    def onNewFile(self, widget, __):
+        if self.currentFileIsSaved:
+            self.loadNewFile()
+        else:
+            self.action = self.loadNewFile
+            self.saveAlert()
 
     def onOpenFile(self, widget, __):
         filters = Gio.ListStore()
@@ -188,7 +196,6 @@ class PickerWindow(Adw.ApplicationWindow):
         self.elementsList.add(actionRow)
 
     def removeElement(self, widget, element):
-        print(type(element))
         if isinstance(element, dict):
             currentElement = self.entryRow.get_parent().get_first_child().get_next_sibling()
             currentElementId = 0
@@ -243,6 +250,19 @@ class PickerWindow(Adw.ApplicationWindow):
             self.statusPage.set_description("")
             self.statusPage.set_icon_name("")
 
+    def loadNewFile(self):
+        self.currentFile = ""
+        self.currentFileTitle = "New File"
+        self.currentFileContent = {"datatype": "raw", "data": []}
+        self.currentFileType = "plaintext"
+
+        child = self.entryRow.get_parent().get_last_child().get_prev_sibling()
+        while child is not None:
+            self.elementsList.remove(child.get_next_sibling())
+            child = child.get_prev_sibling()
+
+        self.checkFileSaved()
+
     def onChosenDialogResponse(self, dialog, task, element):
         response = dialog.choose_finish(task)
         if response == "copy":
@@ -268,8 +288,8 @@ class PickerWindow(Adw.ApplicationWindow):
             return
 
         try:
-            text = contents[1].decode("utf-8")
-        except UnicodeError as err:
+            contents[1].decode("utf-8")
+        except UnicodeError:
             self.toast_overlay.add_toast(
                 Adw.Toast(
                     title=_("Unable to open file: The file isn't encoded properly")
