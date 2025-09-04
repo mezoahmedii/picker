@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 21:37-0400\n"
-"PO-Revision-Date: 2025-08-30 22:25+0100\n"
+"PO-Revision-Date: 2025-09-04 22:25+0100\n"
 "Last-Translator: Albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -153,15 +153,15 @@ msgstr "Mostra elemento selezionato"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:52
 msgid "Added new file action"
-msgstr ""
+msgstr "Aggiunta nuova azione file"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:60
 msgid "Fixed inability to delete items"
-msgstr ""
+msgstr "Risolto il problema dell'impossibilità di eliminare gli elementi"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:68
 msgid "Updated screenshots"
-msgstr ""
+msgstr "Screenshot aggiornati"
 
 #: data/io.github.mezoahmedii.Picker.metainfo.xml.in:76
 msgid "Added preferences screen"
@@ -242,7 +242,7 @@ msgstr "_Scegliere"
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:75
 msgid "_New File"
-msgstr ""
+msgstr "_Nuovo File"
 
 #. Translators: Do NOT remove prefixed underscore; it indicates a mnemonic
 #: src/window.blp:83
