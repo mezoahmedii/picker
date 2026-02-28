@@ -1,4 +1,4 @@
-# Copyright 2025 MezoAhmedII
+# Copyright 2026 MezoAhmedII
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
@@ -49,9 +49,9 @@ class PickerApplication(Adw.Application):
             developer_name="MezoAhmedII",
             website="https://github.com/mezoahmedii/picker",
             issue_url="https://github.com/mezoahmedii/picker/issues",
-            version="1.4.0",
+            version="1.4.1",
             developers=["MezoAhmedII"],
-            copyright="© 2025 MezoAhmedII",
+            copyright="© 2026 MezoAhmedII",
             license_type=Gtk.License.GPL_3_0,
         )
         about.present(parent=self.props.active_window)
