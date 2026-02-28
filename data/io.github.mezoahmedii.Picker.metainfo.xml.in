@@ -25,12 +25,12 @@
   <screenshots>
     <screenshot type="default">
       <image>
-        https://github.com/mezoahmedii/picker/blob/v1.4.0/screenshots/x86_64/adding.png?raw=true</image>
+        https://github.com/mezoahmedii/picker/blob/v1.4.1/screenshots/x86_64/adding.png?raw=true</image>
       <caption>Adding items to the list</caption>
     </screenshot>
     <screenshot>
       <image>
-        https://github.com/mezoahmedii/picker/blob/v1.4.0/screenshots/x86_64/choosing.png?raw=true</image>
+        https://github.com/mezoahmedii/picker/blob/v1.4.1/screenshots/x86_64/choosing.png?raw=true</image>
       <caption>Showing chosen item</caption>
     </screenshot>
   </screenshots>
@@ -45,6 +45,15 @@
   </branding>
 
   <releases>
+    <release version="1.4.1" date="2026-2-28">
+      <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.4.1</url>
+      <description>
+        <ul>
+          <li>Added new file action</li>
+          <li>Fixed HTML elements (e.g. \<b>\</b>) breaking in the list</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.0" date="2025-9-01">
       <url type="details">https://github.com/mezoahmedii/picker/releases/tag/v1.4.0</url>
       <description>
