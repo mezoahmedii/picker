@@ -173,9 +173,7 @@ class PickerWindow(Adw.ApplicationWindow):
             return True
 
     def createElement(self, element, hidden=False):
-        actionRow = Adw.ActionRow(
-            title=element.replace("&", "&amp;")
-        )
+        actionRow = Adw.ActionRow(title=element, use_markup=False)
 
         if hidden:
             hideButton = Gtk.Button(
@@ -500,7 +498,7 @@ class PickerWindow(Adw.ApplicationWindow):
             elements["data"].append(
                 {
                     "id": elementId,
-                    "name": child.get_title().replace("&amp;", "&"),
+                    "name": child.get_title(),
                     "hidden": child.get_first_child().get_last_child(
                     ).get_first_child().get_icon_name() == "hidden-symbolic"
                 })
